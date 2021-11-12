@@ -1,19 +1,17 @@
 # Hive Node
 
-Hive Node是指Hive去中心化存储网络的一个服务节点，可由社区人员或者组织根据安装包搭建部署，并常驻运行的节点服务。所有Hive节点组成整个Hive存储网络。
+Hive Node是指Hive去中心化存储网络的一个服务节点，可由社区人员或者组织根据安装指导进行部署运行，并需要24*7方式常驻运行的节点服务。所有运行的Hive节点组成整个Hive存储网络。
 
-Hive Node被部署运行后，内部会有三个子服务系统常驻运行：
-
-* Hive HTTP service，
+Hive Node部署运行后，会有三个子服务系统常驻作为一体运行：
+* Hive HTTP service
 * IPFS Node
-* MongoDB
+* MongoDB服务
 
-三个子系统各司其职，共同完成整个Hive 网络的数据存取服务。每个Hive Node会承载会承载多个Vault服务，每个Vault服务由前端用户根据DID来进行确权管理和数据存取服务。
+三个子服务各司其职，共同完成整个Hive 网络的数据存取服务。用户可以通过HTTP接口协议与后端Hive Node进行数据存取。每个Hive Node会承载会承载多个Vault服务，每个Vault服务由前端用户根据DID来进行确权管理和数据存取服务。
 
 ## HTTP Service
 
 Hive Node 服务通过HTTP协议向前端用户提供以下组件服务：
-
 * Vault Service的生命周期管理，比如订阅/取消订阅；
 * Bakcup Service的生命周期管理，比如订阅/取消订阅订阅；
 * Vault数据存取，包括数据块文件数据和MongoDB类型的非结构化数据；
