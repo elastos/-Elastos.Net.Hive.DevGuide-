@@ -53,7 +53,6 @@
     * [Query database data](sdks/java/developer-guides/query-database-data.md)
     * [Update database data](sdks/java/developer-guides/update-database-data.md)
     * [Scripting](sdks/java/developer-guides/scripting.md)
-  * [Subscribe to backup service](sdks/java/subscribe-to-backup-service.md)
   * [API Reference](sdks/java/api-reference.md)
 * [Swift](sdks/swift/README.md)
   * [Introduction](sdks/swift/introduction.md)
