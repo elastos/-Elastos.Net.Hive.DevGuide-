@@ -1,55 +1,86 @@
-# Upload file
+# FilesService
 
-上传文件功能源自Vault的文件服务，文件服务是Vault的基础服务。它能为应用上传下载文件、获取文件信息等。文件服务基于IPFS分布式文件存储服务，文件的内容位于IPFS端，文件的元数据位于Vault的数据表内。本节主要介绍如何上传文件到用户的Vault。
+文件数据是 Vault 数据的重要组成部分，而 File Service 是 Vault Service 的基础。File Service 在 Hive Node 端是基于 IPFS 分布式文件存储服务，文件内容在 IPFS 服务上，其元数据保存与 Hive Node 的数据表中。
 
-Vault相关的服务，都通过Vault类来进行。首先，需要创建Vault对象，需要指定AppContext和Hive Node的服务地址。
+上传文件的示例如下：
 
 ```java
-public Vault newVault() {
-    return new Vault(context, getVaultProviderAddress());
-}
+Vault vault = new Vault(context, getVaultProviderAddress());
+FilesServic filesService = vault.getFilesService();
+filesService.getUploadWriter(REMOTE_FILE_PATH)
+        .thenCompose(this::writeFileContent)
+        .thenAcceptAsync(result -> {
+            System.out.println("Successfully get the result.");
+        }).exceptionally(ex -> {
+            ex.printStackTrace();
+            return null;
+        });
 ```
 
-然后获取文件服务。
+创建 Vault 对象依赖的参数，参见 [VaultSubscription](subscribe-to-vault-service.md) 的说明。文件上传的时候，首先通过指定路径（REMOTE_FILE_PATH）获取文件流的 Writer ，然后将文件内容写入 Writer 中 （this::writeFileContent），整个操作都在异步线程中进行的。
+
+## Upload
+
+如示例所示，上传文件提供的接口方式，是通过上传文件的 Hive Node 路径得到对应的写入流对象，SDK 中提供了两种方式的：Writer 和 OutputStream ，用户仅需往这两个对象中写入待上传的文件流即可。
 
 ```java
-@BeforeAll public static void setUp() {
-    // ...
-    Assertions.assertDoesNotThrow(()->filesService = TestData.getInstance().newVault().getFilesService());
-}
+CompletableFuture<OutputStream> getUploadStream(String path);
+CompletableFuture<Writer> getUploadWriter(String path);
 ```
 
-最后通过文件服务上传文件，上传文件接口提供了不同的方式：Writer和OutputStream。获取到其中之一，直接往里写入文件内容即可。下面的测试用例中，上传完之后，会检查上传的文件是否存在，确保上传成功。
+## Download
+
+下载文件也采用和上传文件类似的方法，通过指定远程文件的位置，获取 InputStream 和 Reader：
 
 ```java
-@Test @Order(1) void testUploadText() {
-    Assertions.assertDoesNotThrow(this::uploadTextReally);
-    verifyRemoteFileExists(remoteTxtFilePath);
-}
-
-private void uploadTextReally() throws IOException, ExecutionException, InterruptedException {
-    try (Writer writer = filesService.getUploadWriter(remoteTxtFilePath).get();
-         FileReader fileReader = new FileReader(localTxtFilePath)) {
-        Assertions.assertNotNull(writer);
-        char[] buffer = new char[1];
-        while (fileReader.read(buffer) != -1) {
-            writer.write(buffer);
-        }
-    }
-}
+CompletableFuture<InputStream> getDownloadStream(String path);
+CompletableFuture<Reader> getDownloadReader(String path);
 ```
 
-```java
-@Test @Order(2) void testUploadBin() {
-    Assertions.assertDoesNotThrow(this::uploadBinReally);
-    verifyRemoteFileExists(remoteImgFilePath);
-}
+## List
 
-private void uploadBinReally() throws ExecutionException, InterruptedException, IOException {
-    try (OutputStream out = filesService.getUploadStream(remoteImgFilePath).get()) {
-        Assertions.assertNotNull(out);
-        out.write(Utils.readImage(localImgFilePath));
-        out.flush();
-    }
-}
+列出文件目录下的文件，FileInfo 为单个文件信息，path 为文件目录。
+
+```java
+CompletableFuture<List<FileInfo>> list(String path);
+```
+
+## Stat
+
+获取单个文件的信息。
+
+```java
+CompletableFuture<FileInfo> stat(String path);
+```
+
+## Hash
+
+获取单个文件的 hash 值，hash 算法为 SHA256。
+
+```java
+CompletableFuture<String> hash(String path);
+```
+
+## Move
+
+移动单个文件，从 source 位置移动到 target 位置。
+
+```java
+CompletableFuture<Void> move(String source, String target);
+```
+
+## Copy
+
+拷贝单个文件，从 source 位置移动到 target 位置。
+
+```java
+CompletableFuture<Void> copy(String source, String target);
+```
+
+## Delete
+
+删除文件，文件位置为 path 。
+
+```java
+CompletableFuture<Void> delete(String path);
 ```
