@@ -1,31 +1,46 @@
-# Subscribe to vault service
+# VaultSubscription
 
-订阅Vault服务是使用Vault数据空间的第一步。Vault是一个概念，表示了Hive Node的一块独立的区域，在这个区域内，用户可以使用Vault的相关服务。作为一个Hive Node的使用者，必然是通过应用来进行的，若想存储属于自己的数据（比如：文件和数据库数据），必须先订阅Vault。
+Hive SDK 需要通过 Vault 对象与 Hive Node 交互。用户需要预先在指定的 Hive Node 上订阅创建 Vault Service，然后才可以将应用数据存放到对应的 Vault 中，VaultSubscription 则是用于订阅 Vault Service。
 
-SDK里面，VaultSubscription用于实现Vault的订阅功能。创建它的语句如下：
+使用 VaultSubscription 订阅 Vault Service 的例子如下：
 
 ```java
-public VaultSubscription newVaultSubscription() throws HiveException {
-    return new VaultSubscription(context, getVaultProviderAddress());
-}
+VaultSbuscription vault = new VaultSubscription(context, getVaultProvider());
+vault.subscribe().thenAccept(result -> {
+    System.out.println("Successfully get the result.");
+}).exceptionally(ex -> {
+    ex.printStackTrace();
+    return null;
+});
 ```
 
-创建VaultSubscription对象，必须提供2个参数：
+以上的例子，调用的是订阅接口，创建 VaultSubscription 对象时，需要提供如下两个参数：
 
-- AppContext：用户定义的应用上下文，需要由用户提供三块信息：本地数据存储的位置、App Instance DID、登录时用到的授权信息。
+- context：用户定义的应用上下文，基于接口 AppContextProvider。具体由用户提供三块信息：本地数据存储的位置、App Instance DID、登录时用到的授权信息。
 - Vault Provider Address: Hive Node的访问地址。
 
-有了VaultSubscription对象，就可以订阅Vault了。
+执行完订阅 Vault Service 之后，就可以使用 Vault 相关的服务了。
+
+## Subscribe
+
+订阅操作的原型如下，返回的是一个 CompletableFuture 对象，方便调用者在异步线程中执行订阅操作。此处的 T 代表的类型 VaultInfo （ Vault Service 的信息）。
 
 ```java
-void testSubscribe() {
-    Assertions.assertDoesNotThrow(()->subscription.subscribe().get());
-}
+CompletableFuture<T> subscribe();
 ```
 
-一旦订阅成功，就可以使用Vault类下面的服务了。
+## Unsubscribe
 
-- 文件服务
-- 数据库服务
-- Scripting服务
-- Backup服务
+取消订阅是订阅方式的逆向，它会销毁 Vault 内的所有数据，取消订阅 Vault 之后，Vault 内的服务将不在可用。
+
+```java
+CompletableFuture<Void> unsubscribe();
+```
+
+## Check Subscription
+
+若是想知道当前的订阅信息，可以使用如下方法，它会返回 VaultInfo （ Vault 的信息）。
+
+```java
+CompletableFuture<T> checkSubscription();
+```
