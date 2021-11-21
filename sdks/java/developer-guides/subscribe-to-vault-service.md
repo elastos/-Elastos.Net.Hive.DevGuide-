@@ -7,11 +7,11 @@ Hive SDK 需要通过 Vault 对象与 Hive Node 交互。用户需要预先在�
 ```java
 VaultSbuscription vault = new VaultSubscription(context, getVaultProvider());
 vault.subscribe().thenAccept(result -> {
-    System.out.println("Successfully get the result.");
-}).exceptionally(ex -> {
-    ex.printStackTrace();
-    return null;
-});
+        System.out.println("Successfully get the result.");
+    }).exceptionally(ex -> {
+        ex.printStackTrace();
+        return null;
+    });
 ```
 
 以上的例子，调用的是订阅接口，创建 VaultSubscription 对象时，需要提供如下两个参数：

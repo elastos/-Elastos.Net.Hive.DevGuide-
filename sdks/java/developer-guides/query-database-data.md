@@ -12,13 +12,13 @@ ObjectNode docNode = JsonNodeFactory.instance.objectNode();
 docNode.put("author", "john doe1");
 docNode.put("title", "Eve for Dummies1");
 databaseService.insertOne(COLLECTION_NAME, docNode,
-            new InsertOptions().bypassDocumentValidation(false))
-        .thenAcceptAsync(result -> {
-            System.out.println("Successfully get the result.");
-        }).exceptionally(ex -> {
-            ex.printStackTrace();
-            return null;
-        });
+        new InsertOptions().bypassDocumentValidation(false))
+    .thenAcceptAsync(result -> {
+        System.out.println("Successfully get the result.");
+    }).exceptionally(ex -> {
+        ex.printStackTrace();
+        return null;
+    });
 ```
 
 创建 Vault 对象依赖的参数，参见 [VaultSubscription](subscribe-to-vault-service.md) 的说明。插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION_NAME ）中，同时可以指定插入选项 InsertOptions ，这些选项源自mongodb数据库。

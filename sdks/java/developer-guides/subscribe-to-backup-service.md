@@ -7,11 +7,11 @@ Hive Node 支持备份 Vault Service 的数据，主要是考虑到个人数据�
 ```java
 BackupSubscription backup = new BackupSubscription(context, getVaultProvider());
 backup.subscribe().thenAccept(result -> {
-    System.out.println("Successfully get the result.");
-}).exceptionally(ex -> {
-    ex.printStackTrace();
-    return null;
-});
+        System.out.println("Successfully get the result.");
+    }).exceptionally(ex -> {
+        ex.printStackTrace();
+        return null;
+    });
 ```
 
 创建 BackupSubscription 对象用到的参数和创建 VaultSubscription 对象一样，具体参见 [VaultSubscription](subscribe-to-vault-service.md) 的说明。
