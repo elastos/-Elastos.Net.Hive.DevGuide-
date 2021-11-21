@@ -8,13 +8,13 @@
 Vault vault = new Vault(context, getVaultProviderAddress());
 FilesServic filesService = vault.getFilesService();
 filesService.getUploadWriter(REMOTE_FILE_PATH)
-        .thenCompose(this::writeFileContent)
-        .thenAcceptAsync(result -> {
-            System.out.println("Successfully get the result.");
-        }).exceptionally(ex -> {
-            ex.printStackTrace();
-            return null;
-        });
+    .thenCompose(this::writeFileContent)
+    .thenAcceptAsync(result -> {
+        System.out.println("Successfully get the result.");
+    }).exceptionally(ex -> {
+        ex.printStackTrace();
+        return null;
+    });
 ```
 
 创建 Vault 对象依赖的参数，参见 [VaultSubscription](subscribe-to-vault-service.md) 的说明。文件上传的时候，首先通过指定路径（REMOTE_FILE_PATH）获取文件流的 Writer ，然后将文件内容写入 Writer 中 （this::writeFileContent），整个操作都在异步线程中进行的。
