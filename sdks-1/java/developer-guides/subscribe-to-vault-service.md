@@ -1,46 +1,61 @@
 # VaultSubscription
 
-Hive SDK 需要通过 Vault 对象与 Hive Node 交互。用户需要预先在指定的 Hive Node 上订阅创建 Vault Service，然后才可以将应用数据存放到对应的 Vault 中，VaultSubscription 则是用于订阅 Vault Service。
+Hive SDK 需要通过 Vault 对象与 远程的Vault Service 进行交互。用户需要预先在指定可信的 Hive Node 上订阅创建 Vault Service，然后才能将应用数据存放到对应的 Vault 中.
 
-使用 VaultSubscription 订阅 Vault Service 的例子如下：
+VaultSubscription 类就是用来定订阅创建 Vault Service，Hive Node 服务根据请求者的DID身份创建新的 Vault Service。如果基于该DID身份的 Vault Service 已经存在，则返回已存在的 Vault Service.s
 
-```java
-VaultSbuscription vault = new VaultSubscription(context, getVaultProvider());
-vault.subscribe().thenAccept(result -> {
-        System.out.println("Successfully get the result.");
-    }).exceptionally(ex -> {
-        ex.printStackTrace();
-        return null;
-    });
-```
+## Example
 
-以上的例子，调用的是订阅接口，创建 VaultSubscription 对象时，需要提供如下两个参数：
-
-- context：用户定义的应用上下文，基于接口 AppContextProvider。具体由用户提供三块信息：本地数据存储的位置、App Instance DID、登录时用到的授权信息。
-- Vault Provider Address: Hive Node的访问地址。
-
-执行完订阅 Vault Service 之后，就可以使用 Vault 相关的服务了。
-
-## Subscribe
-
-订阅操作的原型如下，返回的是一个 CompletableFuture 对象，方便调用者在异步线程中执行订阅操作。此处的 T 代表的类型 VaultInfo （ Vault Service 的信息）。
+使用 vaultSubscription 对象在可信的Hive Node 订阅创建新的 Vault Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Vault Service的元数据信息。实际样例代码如下：
 
 ```java
-CompletableFuture<T> subscribe();
+// context = xxx
+// the defintion of getVaultProvider()
+
+VaultSbuscription subscription = new VaultSubscription(context, getVaultProvider());
+subscription.subscribe().thenAccept(vaultInfo -> {
+    System.out.println("Registered vault service successfully");
+    System.out.println("vaultinfo ==>");
+}).exceptionally(ex -> {
+    System.out.println("Failed to register vault service")
+    ex.printStackTrace();
+    return null;
+});
 ```
 
-## Unsubscribe
+一旦订阅成功，就可以使用实例化对象 vault 来存取应用数据。
 
-取消订阅是订阅方式的逆向，它会销毁 Vault 内的所有数据，取消订阅 Vault 之后，Vault 内的服务将不在可用。
-
-```java
-CompletableFuture<Void> unsubscribe();
-```
+## Lifecycle management of vault service
 
 ## Check Subscription
 
-若是想知道当前的订阅信息，可以使用如下方法，它会返回 VaultInfo （ Vault 的信息）。
+用户在可信 Hive Node 上订阅创建后，可以使用 vault 对象来存取应用中的数据，也可以在使用以下接口查看对应 Vault Service 的信息。
 
 ```java
-CompletableFuture<T> checkSubscription();
+subscription.checkSubscription().thenAccept(vaultInfo -> {
+    System.out.println("Dump remote vault service:");
+    System.out.println("...");
+}).exceptinally(ex -> {
+    System.out.println("Failed to check vault subscription");
+    ex.printStackTrace();
+    return null;
+});
 ```
+
+## Subscribe to new vault
+
+用户在使用Vault Service 一段时间，如果发现体验不好，发现另外有可信的 Hive Node 能提供更好的 Vault Service，或者用户自己搭建运行了Hive Node，需要将已使用中 Vault Service 迁移到新的 Hive Node中，迁移完成后需要停止原来 Hive Node上的 Vault Service, 同时销毁其中数据。
+
+
+```java
+subscription.unsbuscribe().thenAccept(() -> {
+    System.out.println("Unsubscribed from the vault service");
+    System.out.println("Cleared all data in this vault");
+}).exceptinally(ex -> {
+    System.out.println("Failed to unsubscribe to vault service");
+    ex.printStackTrace();
+    return null;
+});
+```
+
+注意：调用此接口取消 vault Service 后，该vault内持有数据从对应 Hive Node 上被永久删除，同时该 Vault Serivce 也停止服务。用户必须先保证已有新的 Vault service 完成迁移后，再可调用该接口取消 原来需要废弃的vault service。
