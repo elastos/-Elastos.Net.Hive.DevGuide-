@@ -25,9 +25,9 @@ subscription.subscribe().thenAccept(vaultInfo -> {
 
 一旦订阅成功，就可以使用实例化对象 vault 来存取应用数据。
 
-## Lifecycle management of vault service
+## Subscription management
 
-## Check Subscription
+### Check Subscription
 
 用户在可信 Hive Node 上订阅创建后，可以使用 vault 对象来存取应用中的数据，也可以在使用以下接口查看对应 Vault Service 的信息。
 
@@ -42,7 +42,7 @@ subscription.checkSubscription().thenAccept(vaultInfo -> {
 });
 ```
 
-## Subscribe to new vault
+### Subscribe to new vault
 
 用户在使用Vault Service 一段时间，如果发现体验不好，发现另外有可信的 Hive Node 能提供更好的 Vault Service，或者用户自己搭建运行了Hive Node，需要将已使用中 Vault Service 迁移到新的 Hive Node中，迁移完成后需要停止原来 Hive Node上的 Vault Service, 同时销毁其中数据。
 
