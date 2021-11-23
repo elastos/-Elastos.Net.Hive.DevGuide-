@@ -1,11 +1,10 @@
 # Snippet Code
 
-关于如何使用Hive Java SDK，可以参考SDK的测试用例，以下仅列出测试用例的一些代码片段。
+关于如何使用 Hive Java SDK，可以参考 SDK 的测试用例，以下仅列出测试用例的一些代码片段。
 
 ## Vault
 
-为了能使用Hive Node的服务，首先必须先订阅（subscribe）Vault。订阅Vault意味者在Hive Node端有文件存储的空间，数据库的使用权限等。
-为了订阅Vault，首先要创建VaultSubscription对象。
+为了能使用 Hive Node 的服务，首先必须先订阅（subscribe） Vault Service。订阅 Vault Service 意味者在Hive Node端有文件存储的空间，数据库的使用权限等。为了订阅 Vault Service，首先要创建 VaultSubscription 对象。
 
 ```java
 public VaultSubscription newVaultSubscription() throws HiveException {
@@ -13,7 +12,7 @@ public VaultSubscription newVaultSubscription() throws HiveException {
 }
 ```
 
-有了VaultSubscription对象，便可以通过它来订阅Vault。
+有了 VaultSubscription 对象，便可以通过它来订阅 Vault Service。
 
 ```java
 @Test @Order(3) void testSubscribe() {
@@ -23,8 +22,7 @@ public VaultSubscription newVaultSubscription() throws HiveException {
 
 ## Database
 
-订阅了Vault之后，便可以使用Vault下面的服务，Database服务便是其中之一。
-为了使用Database服务，需要先创建Vault对象。
+订阅了 Vault Service 之后，便可以使用 Vault 下面的服务，Database Service 便是其中之一。为了使用Database Service，需要先创建 Vault 对象。
 
 ```java
 public Vault newVault() {
@@ -32,7 +30,7 @@ public Vault newVault() {
 }
 ```
 
-然后，通过Vault对象，获取Database服务。
+然后，通过 Vault 对象，获取 Database Service。
 
 ```java
 @BeforeAll public static void setUp() {
@@ -41,7 +39,7 @@ public Vault newVault() {
 }
 ```
 
-最后就是使用Database服务，比如插入一条数据：
+最后就是使用 Database Service，比如插入一条数据：
 
 ```java
 @Test @Order(2) void testInsertOne() {
@@ -57,7 +55,7 @@ public Vault newVault() {
 
 ## Files
 
-文件服务和Database服务使用流程是一样的，也是需要先创建Vault对象：
+Files Service 和 Database Service 使用流程是一样的，也是需要先创建 Vault 对象：
 
 ```java
 public Vault newVault() {
@@ -96,10 +94,9 @@ private void uploadTextReally() throws IOException, ExecutionException, Interrup
 
 ## Scripting
 
-Scripting服务的设置目标，是希望Vault的拥有者，能将其拥有的数据和文件分享给指定的人或群体，甚至公开访问权限。
-其使用流程和Database服务也类似，不同的是服务的使用者分为数据的拥有者和数据的访问者。
+Scripting Service 的设置目标，是希望 Vault 的拥有者，能将其拥有的数据和文件分享给指定的人或群体，甚至公开访问权限。其使用流程和 Database Service 也类似，不同的是服务的使用者分为数据的拥有者和数据的访问者。
 
-数据的拥有者需要先创建Vault对象：
+数据的拥有者需要先创建 Vault 对象：
 
 ```java
 public Vault newVault() {
@@ -107,13 +104,13 @@ public Vault newVault() {
 }
 ```
 
-然后获取到Scripting服务：
+然后获取到 Scripting Service：
 
 ```java
 scriptingService = testData.newVault().getScriptingService();
 ```
 
-然后注册脚本给数据的访问者调用。Scripting服务内部设置了多种脚本类型，数据的拥有者需要先设置脚本，并指定权限：
+然后注册脚本给数据的访问者调用。Scripting Service 内部设置了多种脚本类型，数据的拥有者需要先设置脚本，并指定权限：
 
 ```java
 private void register_script_for_caller() {
@@ -135,7 +132,7 @@ private void register_script_for_caller() {
 }
 ```
 
-数据的访问者可以通过脚本的名称调用脚本，但使用流程和数据的拥有者不同，他需要先获取ScriptRunner对象：
+数据的访问者可以通过脚本的名称调用脚本，但使用流程和数据的拥有者不同，他需要先获取 ScriptRunner 对象：
 
 ```java
 public ScriptRunner newCallerScriptRunner() {
@@ -161,8 +158,8 @@ private void run_script_without_group_permission() {
 
 ## Backup
 
-当前SDK支持的备份功能，是从Hive Node A将用户Vault里的数据备份到Hive Node B。
-备份的流程是在Hive Node A完成的，同样也是先获取Vault对象内部的备份服务：
+当前 SDK 支持的备份功能，是从 Hive Node A 将用户 Vault 里的数据备份到 Hive Node B。
+备份的流程是在 Hive Node A 完成的，同样也是先获取 Vault 对象内部的备份服务：
 
 ```java
 public Vault newVault() {
@@ -172,7 +169,7 @@ public Vault newVault() {
 Assertions.assertDoesNotThrow(()->backupService = TestData.getInstance().getBackupService());
 ```
 
-为了能成功执行备份操作，需要在Hive Node B端订阅备份服务：
+为了能成功执行备份操作，需要在 Hive Node B 端订阅备份服务：
 
 ```java
 public BackupSubscription newBackupSubscription() throws HiveException {
@@ -187,7 +184,7 @@ private static void trySubscribeBackup() {
 }
 ```
 
-最后在Hive Node A端执行备份操作：
+最后在 Hive Node A 端执行备份操作：
 
 ```java
 @Test @Order(1) void testStartBackup() {
@@ -195,8 +192,8 @@ private static void trySubscribeBackup() {
 }
 ```
 
-若是要将备份的vault数据在Hive Node B端升级为一个Vault，此时相当于将Hive Node A的Vault迁移到Hive Node B。
-需要Backup对象，并获取Promotion服务。
+若是要将备份的 Vault 数据在 Hive Node B 端升级为一个新的 Vault Service，此时相当于将 Hive Node A 的 Vault 迁移到 Hive Node B。
+需要 Backup 对象，并获取 Promotion Service。
 
 ```java
 public Backup newBackup() {
@@ -218,8 +215,7 @@ public Backup newBackup() {
 
 ## Payment
 
-支付服务用于升级Vault或Backup的存储空间，支付的金额将由Hive Node的拥有者收取。
-支付服务通过VaultSubscription对象获取，
+支付服务用于升级 Vault 或 Backup 的存储空间，支付的金额将由 Hive Node 的拥有者收取。支付服务通过 VaultSubscription 对象获取：
 
 ```java
 public VaultSubscription newVaultSubscription() throws HiveException {
