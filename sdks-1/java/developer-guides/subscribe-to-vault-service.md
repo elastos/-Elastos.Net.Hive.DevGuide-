@@ -2,15 +2,53 @@
 
 Hive SDK 需要通过 Vault 对象与 远程的Vault Service 进行交互。用户需要预先在指定可信的 Hive Node 上订阅创建 Vault Service，然后才能将应用数据存放到对应的 Vault 中.
 
-VaultSubscription 类就是用来定订阅创建 Vault Service，Hive Node 服务根据请求者的DID身份创建新的 Vault Service。如果基于该DID身份的 Vault Service 已经存在，则返回已存在的 Vault Service 元数据信息。
+VaultSubscription 类就是用来定订阅创建 Vault Service，Hive Node 服务根据请求者的DID身份创建新的 Vault Service。如果基于该DID身份的 Vault Service 已经存在，则返回已存在的 Vault Service.
 
 ## Example
 
 使用 vaultSubscription 对象在可信的Hive Node 订阅创建新的 Vault Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Vault Service的元数据信息。实际样例代码如下：
 
 ```java
-// context = xxx
-// the defintion of getVaultProvider()
+AppContext context = AppContext.build(new AppContextProvider() {
+        @Override
+        public String getLocalDataDir() {
+            // return local location for storing data.
+            return getLocalStorePath();
+        }
+
+        @Override
+        public DIDDocument getAppInstanceDocument() {
+            // return the application instance DID document.
+            try {
+                return appInstanceDid.getDocument();
+            } catch (DIDException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        public CompletableFuture<String> getAuthorization(String jwtToken) {
+            // return the authorization string for auth API.
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    Claims claims = new JwtParserBuilder().build().parseClaimsJws(jwtToken).getBody();
+                    if (claims == null)
+                        throw new HiveException("Invalid jwt token as authorization.");
+                    return appInstanceDid.createToken(appInstanceDid.createPresentation(
+                            userDid.issueDiplomaFor(appInstanceDid),
+                            claims.getIssuer(), (String) claims.get("nonce")), claims.getIssuer());
+                } catch (Exception e) {
+                    throw new CompletionException(new HiveException(e.getMessage()));
+                }
+            });
+        }
+    }, userDid.toString());
+
+public String getVaultProvider() {
+    // return the URL of the hive node from the configure file.
+    return nodeConfig.provider();
+}
 
 VaultSbuscription subscription = new VaultSubscription(context, getVaultProvider());
 subscription.subscribe().thenAccept(vaultInfo -> {
