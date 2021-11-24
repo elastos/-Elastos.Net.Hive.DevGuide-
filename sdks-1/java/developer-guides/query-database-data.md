@@ -2,7 +2,7 @@
 
 Hive Node 的 Database Service 也是 Hive Node 的基础服务，Database Service 基于 mongodb 的 NoSQL 数据库，Database Service 提供了基础的 CRUD 功能。
 
-插入数据的示例如下：
+插入数据的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
@@ -21,7 +21,7 @@ databaseService.insertOne(COLLECTION_NAME, docNode,
     });
 ```
 
-创建 Vault 对象依赖的参数，参见 [VaultSubscription](subscribe-to-vault-service.md) 的说明。插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION_NAME ）中，同时可以指定插入选项 InsertOptions ，这些选项源自mongodb数据库。
+插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION_NAME ）中，同时可以指定插入选项 InsertOptions ，这些选项源自mongodb数据库。
 
 ## Create Collection
 

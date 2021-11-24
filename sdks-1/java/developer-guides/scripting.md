@@ -2,7 +2,7 @@
 
 Hive Node 上，为了支持 Vault 数据分享给指定或者所有的访问者，提供了Scripting Service。Scripting Service 通过提供可执行脚本来将 Vault 中的数据（文件或数据库数据）分享给其他人。数据的拥有者设计、注册脚本，数据的使用者执行脚本操作数据。
 
-注册脚本的例子如下：
+注册脚本的例子如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```shell
 Vault vault = new Vault(context, getVaultProviderAddress());
@@ -32,7 +32,7 @@ scriptingService.registerScript(ScriptConst.SCRIPT_NAME,
     });
 ```
 
-创建 Vault 对象依赖的参数，参见 [VaultSubscription](subscribe-to-vault-service.md) 的说明。该例子演示了如何注册一个脚本，注册脚本的时候需要设置条件（ condition ），用于限制数据的使用者。另外就是脚本的内容（ executable ）为一个模版，允许调用脚本的用户可以往数据表里插入内容（类型为 InsertExecutable ）。同时脚本里面限制了数据的访问者能访问的数据（$params定义的参数）。注册完脚本后，满足条件的访问者可以通过执行脚本来插入数据。此处的使用场景为，往数据拥有者的 Vault 里面发送消息。
+该例子演示了如何注册一个脚本，注册脚本的时候需要设置条件（ condition ），用于限制数据的使用者。另外就是脚本的内容（ executable ）为一个模版，允许调用脚本的用户可以往数据表里插入内容（类型为 InsertExecutable ）。同时脚本里面限制了数据的访问者能访问的数据（$params定义的参数）。注册完脚本后，满足条件的访问者可以通过执行脚本来插入数据。此处的使用场景为，往数据拥有者的 Vault 里面发送消息。
 
 ## Register Script
 

@@ -6,50 +6,9 @@ VaultSubscription 类就是用来定订阅创建 Vault Service，Hive Node 服�
 
 ## Example
 
-使用 vaultSubscription 对象在可信的Hive Node 订阅创建新的 Vault Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Vault Service的元数据信息。实际样例代码如下：
+使用 vaultSubscription 对象在可信的Hive Node 订阅创建新的 Vault Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Vault Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```java
-AppContext context = AppContext.build(new AppContextProvider() {
-        @Override
-        public String getLocalDataDir() {
-            // return local location for storing data.
-            return getLocalStorePath();
-        }
-
-        @Override
-        public DIDDocument getAppInstanceDocument() {
-            // return the application instance DID document.
-            try {
-                return appInstanceDid.getDocument();
-            } catch (DIDException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        public CompletableFuture<String> getAuthorization(String jwtToken) {
-            // return the authorization string for auth API.
-            return CompletableFuture.supplyAsync(() -> {
-                try {
-                    Claims claims = new JwtParserBuilder().build().parseClaimsJws(jwtToken).getBody();
-                    if (claims == null)
-                        throw new HiveException("Invalid jwt token as authorization.");
-                    return appInstanceDid.createToken(appInstanceDid.createPresentation(
-                            userDid.issueDiplomaFor(appInstanceDid),
-                            claims.getIssuer(), (String) claims.get("nonce")), claims.getIssuer());
-                } catch (Exception e) {
-                    throw new CompletionException(new HiveException(e.getMessage()));
-                }
-            });
-        }
-    }, userDid.toString());
-
-public String getVaultProvider() {
-    // return the URL of the hive node from the configure file.
-    return nodeConfig.provider();
-}
-
 VaultSbuscription subscription = new VaultSubscription(context, getVaultProvider());
 subscription.subscribe().thenAccept(vaultInfo -> {
     System.out.println("Registered vault service successfully");
@@ -84,9 +43,8 @@ subscription.checkSubscription().thenAccept(vaultInfo -> {
 
 用户在使用Vault Service 一段时间，如果发现体验不好，发现另外有可信的 Hive Node 能提供更好的 Vault Service，或者用户自己搭建运行了Hive Node，需要将已使用中 Vault Service 迁移到新的 Hive Node中，迁移完成后需要停止原来 Hive Node上的 Vault Service, 同时销毁其中数据。
 
-
 ```java
-subscription.unsbuscribe().thenAccept(() -> {
+subscription.unsbuscribe().thenAccept(result -> {
     System.out.println("Unsubscribed from the vault service");
     System.out.println("Cleared all data in this vault");
 }).exceptinally(ex -> {
@@ -97,3 +55,33 @@ subscription.unsbuscribe().thenAccept(() -> {
 ```
 
 注意：调用此接口取消 vault Service 后，该vault内持有数据从对应 Hive Node 上被永久删除，同时该 Vault Serivce 也停止服务。用户必须先保证已有新的 Vault service 完成迁移后，再可调用该接口取消 原来需要废弃的vault service。
+
+### Get Pricing Plans
+
+为了能够升级 Vault 的存储空间，VaultSubscription 支持获取可以升级的计划套餐。获取到的列表是 Hive Node 在部署的时候，设置好的，同时也必须是 Hive Node 支持的套餐类型。
+
+```java
+subscription.getPricingPlanList().thenAccept(list -> {
+    System.out.println("Get pricing plans successfully.");
+    System.out.println("List<PricingPlan> =>");
+}).exceptinally(ex -> {
+    System.out.println("Failed to get pricing plans");
+    ex.printStackTrace();
+    return null;
+});
+```
+
+### Get Pricing Plan
+
+如果知道价格计划的名字，也可以通过它获取详情。
+
+```java
+subscription.getPricingPlan(PRICING_PLAN_NAME).thenAccept(pricingPlan -> {
+    System.out.println("Get pricing plan successfully.");
+    System.out.println("PricingPlan =>");
+}).exceptinally(ex -> {
+    System.out.println("Failed to get pricing plan");
+    ex.printStackTrace();
+    return null;
+});
+```

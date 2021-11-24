@@ -6,12 +6,9 @@ BackupSubscription 类就是用来定订阅创建 Backup Service，Hive Node 服
 
 ## Examples
 
-使用 BackupSubscription 对象在可信的Hive Node 订阅创建新的 Backup Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Backup Service的元数据信息。实际样例代码如下：
+使用 BackupSubscription 对象在可信的Hive Node 订阅创建新的 Backup Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Backup Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```java
-// context = xxx
-// the defintion of getVaultProvider()
-
 BackupSubscritpion subscription = new BackupSubscritpion(context, getVaultProvider());
 subscription.subscribe().thenAccept(backup -> {
     System.out.println("Registered backup service successfully");
@@ -46,7 +43,7 @@ subscription.checkSubscription().thenAccept(backup -> {
 });
 ```
 
-### Unsbuscription
+### Unsubscription
 
 用户在使用Backup Service 一段时间，如果发现体验不好，发现另外有可信的 Hive Node 能提供更好的 Backup Service, 则可以取消订阅并销毁该 Backup中的数据，转向另外可信的 Hive Node 节点订阅新的 Backup Service。
 

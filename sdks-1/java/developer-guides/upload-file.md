@@ -2,7 +2,7 @@
 
 文件数据是 Vault 数据的重要组成部分，而 File Service 是 Vault Service 的基础。File Service 在 Hive Node 端是基于 IPFS 分布式文件存储服务，文件内容在 IPFS 服务上，其元数据保存与 Hive Node 的数据表中。
 
-上传文件的示例如下：
+上传文件的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
@@ -17,7 +17,7 @@ filesService.getUploadWriter(REMOTE_FILE_PATH)
     });
 ```
 
-创建 Vault 对象依赖的参数，参见 [VaultSubscription](subscribe-to-vault-service.md) 的说明。文件上传的时候，首先通过指定路径（REMOTE_FILE_PATH）获取文件流的 Writer ，然后将文件内容写入 Writer 中 （this::writeFileContent），整个操作都在异步线程中进行的。
+文件上传的时候，首先通过指定路径（REMOTE_FILE_PATH）获取文件流的 Writer ，然后将文件内容写入 Writer 中 （this::writeFileContent），整个操作都在异步线程中进行的。
 
 ## Upload
 
