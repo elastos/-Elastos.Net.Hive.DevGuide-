@@ -8,13 +8,14 @@
 Vault vault = new Vault(context, getVaultProviderAddress());
 FilesServic filesService = vault.getFilesService();
 filesService.getUploadWriter(REMOTE_FILE_PATH)
-    .thenCompose(this::writeFileContent)
-    .thenAcceptAsync(result -> {
-        System.out.println("Successfully get the result.");
-    }).exceptionally(ex -> {
-        ex.printStackTrace();
-        return null;
-    });
+.thenCompose(this::writeFileContent)
+.thenAcceptAsync(result -> {
+    System.out.println("upload the file by writer successfully");
+}).exceptionally(ex -> {
+    System.out.println("failed to upload the file by writer");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 文件上传的时候，首先通过指定路径（REMOTE_FILE_PATH）获取文件流的 Writer ，然后将文件内容写入 Writer 中 （this::writeFileContent），整个操作都在异步线程中进行的。
@@ -24,8 +25,15 @@ filesService.getUploadWriter(REMOTE_FILE_PATH)
 如示例所示，上传文件提供的接口方式，是通过上传文件的 Hive Node 路径得到对应的写入流对象，SDK 中提供了两种方式的：Writer 和 OutputStream ，用户仅需往这两个对象中写入待上传的文件流即可。
 
 ```java
-CompletableFuture<OutputStream> getUploadStream(String path);
-CompletableFuture<Writer> getUploadWriter(String path);
+filesService.getUploadStream(REMOTE_FILE_PATH)
+.thenCompose(this::writeFileContent)
+.thenAcceptAsync(result -> {
+    System.out.println("upload the file by output stream successfully");
+}).exceptionally(ex -> {
+    System.out.println("failed to upload the file by output stream");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 ## Download
@@ -33,8 +41,29 @@ CompletableFuture<Writer> getUploadWriter(String path);
 下载文件也采用和上传文件类似的方法，通过指定远程文件的位置，获取 InputStream 和 Reader：
 
 ```java
-CompletableFuture<InputStream> getDownloadStream(String path);
-CompletableFuture<Reader> getDownloadReader(String path);
+filesService.getDownloadStream(REMOTE_FILE_PATH)
+.thenCompose(this::readFileContent)
+.thenAcceptAsync(result -> {
+    System.out.println("download the file by input stream successfully");
+}).exceptionally(ex -> {
+    System.out.println("failed to download the file by input stream");
+    ex.printStackTrace();
+    return null;
+});
+```
+
+下面是使用 Reader 的示例，和 InputStream 的类似：
+
+```java
+filesService.getDownloadReader(REMOTE_FILE_PATH)
+.thenCompose(this::readFileContent)
+.thenAcceptAsync(result -> {
+    System.out.println("download the file by input stream successfully");
+}).exceptionally(ex -> {
+    System.out.println("failed to download the file by input stream");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 ## List
@@ -42,7 +71,15 @@ CompletableFuture<Reader> getDownloadReader(String path);
 列出文件目录下的文件，FileInfo 为单个文件信息，path 为文件目录。
 
 ```java
-CompletableFuture<List<FileInfo>> list(String path);
+filesService.list(REMOTE_DIR_PATH)
+.thenAcceptAsync(list -> {
+    System.out.println("list folder files successfully");
+    System.out.println("List<FileInfo> =>");
+}).exceptionally(ex -> {
+    System.out.println("failed to list folder files");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 ## Stat
@@ -50,7 +87,15 @@ CompletableFuture<List<FileInfo>> list(String path);
 获取单个文件的信息。
 
 ```java
-CompletableFuture<FileInfo> stat(String path);
+filesService.stat(REMOTE_FILE_PATH)
+.thenAcceptAsync(fileInfo -> {
+    System.out.println("get the state of the file successfully");
+    System.out.println("FileInfo =>");
+}).exceptionally(ex -> {
+    System.out.println("failed to get the state of the file");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 ## Hash
@@ -58,7 +103,15 @@ CompletableFuture<FileInfo> stat(String path);
 获取单个文件的 hash 值，hash 算法为 SHA256。
 
 ```java
-CompletableFuture<String> hash(String path);
+filesService.hash(REMOTE_FILE_PATH)
+.thenAcceptAsync(hash -> {
+    System.out.println("get the hash of the file successfully");
+    System.out.println("hash string =>");
+}).exceptionally(ex -> {
+    System.out.println("failed to get the hash of the file");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 ## Move
@@ -66,7 +119,15 @@ CompletableFuture<String> hash(String path);
 移动单个文件，从 source 位置移动到 target 位置。
 
 ```java
-CompletableFuture<Void> move(String source, String target);
+filesService.move(remoteTxtFilePath, remoteBackupTxtFilePath)
+.thenAcceptAsync(result -> {
+    System.out.println("move the file successfully");
+    System.out.println(" => ");
+}).exceptionally(ex -> {
+    System.out.println("failed to move the file");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 ## Copy
@@ -74,7 +135,15 @@ CompletableFuture<Void> move(String source, String target);
 拷贝单个文件，从 source 位置移动到 target 位置。
 
 ```java
-CompletableFuture<Void> copy(String source, String target);
+filesService.copy(remoteTxtFilePath, remoteBackupTxtFilePath)
+.thenAcceptAsync(result -> {
+    System.out.println("copy the file successfully");
+    System.out.println(" => ");
+}).exceptionally(ex -> {
+    System.out.println("failed to copy the file");
+    ex.printStackTrace();
+    return null;
+});
 ```
 
 ## Delete
@@ -82,5 +151,13 @@ CompletableFuture<Void> copy(String source, String target);
 删除文件，文件位置为 path 。
 
 ```java
-CompletableFuture<Void> delete(String path);
+filesService.delete(REMOTE_FILE_PATH)
+.thenAcceptAsync(result -> {
+    System.out.println("delete the file successfully");
+    System.out.println(" =>");
+}).exceptionally(ex -> {
+    System.out.println("failed to delete of the file");
+    ex.printStackTrace();
+    return null;
+});
 ```
