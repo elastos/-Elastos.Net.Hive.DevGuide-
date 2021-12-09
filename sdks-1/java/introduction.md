@@ -1,6 +1,6 @@
 # Introduction
 
-Hive Java SDK 是 Elastos Hive 针对 Java 语言开发者提供的客户端 SDK 版本，开发者在应用开发中集成该 SDK 使用Hive Node提供的数据存取服务。目前 SDK 兼容的最低 Java 语言版本是 Java 1.8 (aka Java8)，可以使用在 desktop 的基于标准 Java 环境，或者 Android Java 环境的应用程序开发中。
+Hive Java SDK 是 Elastos Hive 针对 Java 语言开发者提供的客户端SDK版本，开发者在应用开发中集成该SDK使用Hive Node提供的数据存取服务。目前 SDK 兼容的最低 Java 语言版本是 Java 1.8 (aka Java8)，可以使用在 desktop 的基于标准 Java 环境，或者 Android Java 环境的应用程序开发中。
 
 ## Features
 
@@ -8,7 +8,7 @@ Hive Java SDK 向前端应用程序提供 以下功能集类型接口：
 
 * Files data storage;
 * Database data storage;
-* Scritping
+* Scripting
 * Subscription to vault service
 * Subscription to back service
 * Vault backup and restore

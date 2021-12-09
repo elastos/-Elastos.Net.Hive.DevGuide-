@@ -1,8 +1,11 @@
 # Build & Install
 
-使用 Hive Java SDK 可以有两种方式，一种是使用 Gradle 或者 Maven 的包管理器，直接从 package repository 中下载由开发者编译的分发包，适合于初级开发者便利集成；一种是下载源代码来构建编译集成。
+开发者通过以下两种方式使用Hive Java SDK：
 
-## How To Use SDK
+* 使用 Gradle 或者 Maven 的包管理器，直接从 package repository 中下载由开发者编译的分发包，适合于初级开发者便利集成
+* 下载源代码来构建环境编译集成
+
+## How To Use SDK package
 
 Here are examples to integrate this SDK into the projects with Gradle or Maven build system.
 
@@ -21,7 +24,7 @@ Add the following snippet of dependency declaration in their pom scripts:
 
 ### Glide
 
-Just add the following snippet scripts into the dependencies items build.gradle:
+Just add the following snippet scripts into the dependency item in build.gradle:
 
 ```
 dependencies {
