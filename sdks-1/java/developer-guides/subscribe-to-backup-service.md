@@ -1,12 +1,12 @@
 # BackupSubscription
 
-考虑到 Hive Node 上数据的冗余性，需要保持 Vault 中数据的多地备份. 以防对应 Hive Node 如果失效后，可选择在其他可信的 Hive Node 恢复生成可继续服务的 Vault Service。 BackupSubscription 类就是用于 在可信的 Hive Node 上订阅创建 Backup Service。创建完成后，就可用于将制定 Vault Service中数据备份到该 Backup Service 中来。
+考虑到Hive Node上数据的冗余性，需要保持Vault中数据的多地备份. 以防对应 Hive Node如果失效后，可选择在其他可信的 Hive Node恢复生成可继续服务的 Vault Service。 BackupSubscription 类就是用于 在可信Hive Node上订阅创建Backup Service。创建完成后，就可用于将制定 Vault Service中数据备份到该Backup Service中来。
 
 BackupSubscription 类就是用来定订阅创建 Backup Service，Hive Node 服务根据请求者的DID身份创建新的 Backup Service。如果基于该DID身份的 Backup Service 已经存在，则返回已存在的 Backup Service 元数据信息。
 
 ## Examples
 
-使用 BackupSubscription 对象在可信的Hive Node 订阅创建新的 Backup Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Backup Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+使用BackupSubscription实例在可信的Hive Node订阅创建新的 Backup Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Backup Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```java
 BackupSubscritpion subscription = new BackupSubscritpion(context, getVaultProvider());
@@ -60,4 +60,3 @@ subscription.unsbuscribe().thenAccept(() -> {
 ```
 
 注意：调用此接口销毁 Backup Service 后，该backup 内持有数据从对应 Hive Node 上被永久删除，同时该 Backup Serivce 也停止服务。
-
