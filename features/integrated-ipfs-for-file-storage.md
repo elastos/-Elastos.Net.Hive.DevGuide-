@@ -1,5 +1,5 @@
 ---
-description: Utilize the strengths of IPFS network to work for Hive
+description: Utilize the strengths of IPFS network to work for Hive, and enhance its accessiblity and redundancy of vault data as well.
 ---
 
 # Integrated IPFS for file storage
