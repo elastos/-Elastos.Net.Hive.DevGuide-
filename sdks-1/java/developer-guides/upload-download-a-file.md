@@ -1,46 +1,64 @@
-# Upload-download-a-file
+# FilesService
 
-文件数据是 Vault 数据的重要组成部分，而 File Service 是 Vault Service 的基础。File Service 在 Hive Node 端是基于 IPFS 分布式文件存储服务，文件内容在 IPFS 服务上，其元数据保存与 Hive Node 的数据表中。
+Hive SDK 通过 FileService 类将文件上传到对应的 Vault 中。文件数据是 Hive SDK 支持的数据类型之一。
+FileService 类是 Vault Service 中衍生子服务之一，用于支持对文件类型的操作，比如上传，下载，删除等。文件数据一旦上传到 Hive Node 后，其文件块数据被托管存储到对应的IPFS Node 中，而其元数据信息则被托管到 Vault 内部数据库中。
 
-上传文件的示例如下（ context 和 vault provider 的设置参见[Developer Guide](./) ）：
+## 上传文件
+
+### 使用写文件流接口 Writer 方式上传文件数据
+
+上传文件时，需要先从 Vault 实例中获取 FileSerivce 接口实例，然后设置目标路径（REMOTE_FILE_PATH)来获取远程写文件流接口实例 Writer，同时将文件内容写入到该文件流的。写入文件数据的过程，也就是上传文件数据的过程。
+
+使用FileService 实例上传文件整个过程通过 CompletableFuture 模式串联起来，最终返回一个 CompletableFuture 对象，表示文件上传成功还是上传失败跑出异常。
+
+通过使用写文件流接口方式上传文件的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
-FilesServic filesService = vault.getFilesService();
+FilesService filesService = vault.getFilesService();
 filesService.getUploadWriter(REMOTE_FILE_PATH)
-.thenCompose(this::writeFileContent)
-.thenAcceptAsync(result -> {
-    System.out.println("upload the file by writer successfully");
-}).exceptionally(ex -> {
-    System.out.println("failed to upload the file by writer");
-    ex.printStackTrace();
-    return null;
-});
+    .thenCompose(this::writeFileContent)
+    .thenAcceptAsync(result -> {
+        System.out.println("Upload a file using writer.");
+    }).exceptionally(ex -> {
+        System.out.println("Failed to upload a file");
+        ex.printStackTrace();
+        return null;
+    }
+);
 ```
 
-文件上传的时候，首先通过指定路径（REMOTE\_FILE\_PATH）获取文件流的 Writer ，然后将文件内容写入 Writer 中 （this::writeFileContent），整个操作都在异步线程中进行的。
+### 使用输出流 OutputStream 方式上传文件数据
 
-## Upload
+上传文件时，也可以通过 FileService 接口实例设置目录路径 (REMOTE_FILE_PATH)来获取远程输出流 OutputStream，同时将文件内容写入该输入流 OutputStream 实例中。
 
-如示例所示，上传文件提供的接口方式，是通过上传文件的 Hive Node 路径得到对应的写入流对象，SDK 中提供了两种方式的：Writer 和 OutputStream ，用户仅需往这两个对象中写入待上传的文件流即可。
+使用FileService 实例上传文件整个过程通过 CompletableFuture 模式串联起来，最终返回一个 CompletableFuture 对象，表示文件上传成功还是上传失败跑出异常。
+
+通过使用输出流接口方式上传文件的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+
 
 ```java
+Vault vault = new Vault(context, getVaultProviderAddress());
+FilesService filesService = vault.getFilesService();
 filesService.getUploadStream(REMOTE_FILE_PATH)
 .thenCompose(this::writeFileContent)
 .thenAcceptAsync(result -> {
-    System.out.println("upload the file by output stream successfully");
+    System.out.println("Upload a file using OutputStream.");
 }).exceptionally(ex -> {
-    System.out.println("failed to upload the file by output stream");
+    System.out.println("Failed to upload a file");
     ex.printStackTrace();
     return null;
 });
 ```
 
-## Download
+## 下载文件
 
-下载文件也采用和上传文件类似的方法，通过指定远程文件的位置，获取 InputStream 和 Reader：
+与上传文件类似，下载文件时通过 FileSerice 实例通过获取 Reader 或者 InputStream 实例，再基于Reader 实例或 InputStream 实例下载在 Vault 中的文件数据。
 
 ```java
+Vault vault = new Vault(context, getVaultProviderAddress());
+FilesService filesService = vault.getFilesService();
+
 filesService.getDownloadStream(REMOTE_FILE_PATH)
 .thenCompose(this::readFileContent)
 .thenAcceptAsync(result -> {
@@ -50,11 +68,7 @@ filesService.getDownloadStream(REMOTE_FILE_PATH)
     ex.printStackTrace();
     return null;
 });
-```
 
-下面是使用 Reader 的示例，和 InputStream 的类似：
-
-```java
 filesService.getDownloadReader(REMOTE_FILE_PATH)
 .thenCompose(this::readFileContent)
 .thenAcceptAsync(result -> {
@@ -66,7 +80,7 @@ filesService.getDownloadReader(REMOTE_FILE_PATH)
 });
 ```
 
-## List
+## 枚举指定目录下所有文件和子目录
 
 列出文件目录下的文件，FileInfo 为单个文件信息，path 为文件目录。
 
@@ -98,22 +112,6 @@ filesService.stat(REMOTE_FILE_PATH)
 });
 ```
 
-## Hash
-
-获取单个文件的 hash 值，hash 算法为 SHA256。
-
-```java
-filesService.hash(REMOTE_FILE_PATH)
-.thenAcceptAsync(hash -> {
-    System.out.println("get the hash of the file successfully");
-    System.out.println("hash string =>");
-}).exceptionally(ex -> {
-    System.out.println("failed to get the hash of the file");
-    ex.printStackTrace();
-    return null;
-});
-```
-
 ## Move
 
 移动单个文件，从 source 位置移动到 target 位置。
@@ -125,22 +123,6 @@ filesService.move(remoteTxtFilePath, remoteBackupTxtFilePath)
     System.out.println(" => ");
 }).exceptionally(ex -> {
     System.out.println("failed to move the file");
-    ex.printStackTrace();
-    return null;
-});
-```
-
-## Copy
-
-拷贝单个文件，从 source 位置移动到 target 位置。
-
-```java
-filesService.copy(remoteTxtFilePath, remoteBackupTxtFilePath)
-.thenAcceptAsync(result -> {
-    System.out.println("copy the file successfully");
-    System.out.println(" => ");
-}).exceptionally(ex -> {
-    System.out.println("failed to copy the file");
     ex.printStackTrace();
     return null;
 });
