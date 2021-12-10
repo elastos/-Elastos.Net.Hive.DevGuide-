@@ -1,10 +1,10 @@
 # Build App
 
-Hive Java SDK 提供了一个 Application Demo，展示了如何在 Android 应用中使用 SDK。其位于如下位置：
+Hive Java SDK 提供了一个 Demo App，展示了如何在 Android 应用中使用 SDK 实现一些功能。Demo App 代码位于如下位置：
 
 - <SOURCE_ROOT>/samples/hellosdk
 
-若要编译此应用，需要准备 Android 开发环境，具体可以参考这里：
+若要编译此应用，首先需要准备 Android 开发环境，具体可以参考这里：
 
 - https://developer.android.com/docs
 
@@ -15,3 +15,5 @@ Hive Java SDK 提供了一个 Application Demo，展示了如何在 Android 应�
 编译完成后，生成的 apk 文件位于如下位置：
 
 - <APP_ROOT>/app/build/outputs/apk/debug/app-debug.apk
+
+最后，将编译好的 apk 文件安装至运行 Android 系统的模拟器或真机，可以查看到 Demo App 演示的功能。

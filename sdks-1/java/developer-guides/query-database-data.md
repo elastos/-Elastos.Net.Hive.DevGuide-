@@ -1,6 +1,6 @@
 # DatabaseService
 
-Hive Node 的 Database Service 也是 Hive Node 的基础服务，Database Service 基于 mongodb 的 NoSQL 数据库，Database Service 提供了基础的 CRUD 功能。
+Hive Node 的 Database Service 也是 Hive Node 的基础服务，Database Service 基于的 mongodb 是 NoSQL 数据库，Database Service 提供了基础的 CRUD 功能。通过 Database Service 的功能，应用可以存储一些动态数据，比如：讯息、应用配置项目等。
 
 ## Example
 
@@ -25,7 +25,7 @@ databaseService.insertOne(COLLECTION_NAME, docNode,
 });
 ```
 
-插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION_NAME ）中，同时可以指定插入选项 InsertOptions ，这些选项源自mongodb数据库。
+插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION_NAME ）中，同时可以指定插入选项 InsertOptions ，InsertOptions 选项源自mongodb数据库相对应的功能。
 
 ## Create Collection
 
@@ -45,7 +45,7 @@ databaseService.createCollection("test_collection")
 
 ## Delete Collection
 
-删除 mongodb 数据表，表内的数据一并删除。
+删除 mongodb 数据表，表内的数据会一并删除。
 
 ```java
 databaseService.deleteCollection("test_collection")
@@ -61,7 +61,7 @@ databaseService.deleteCollection("test_collection")
 
 ## Insert
 
-往数据表中插入数据，可以是单条数据，也可以是多条数据。如上面的示例所示，插入选项 InsertOptions 源自于 mongodb 插入 document 的选项，具体支持哪些选项，可以参考 InsertOptions 的定义。此处展示插入单条数据的例子。
+往数据表中插入数据，可以是单条数据，也可以是多条数据。如上面的示例所示，插入选项 InsertOptions 源自于 mongodb 插入 document 的选项，具体支持哪些选项，可以参考 InsertOptions 的定义。此处展示插入多条数据的例子。
 
 ```java
 List<JsonNode> nodes = new ArrayList<>();
@@ -91,7 +91,7 @@ databaseService.insertMany("test_collection", nodes,
 
 ## Update
 
-与插入数据一样，更新数据也提供了两个版本的接口：更新满足条件的第一条数据和多条数据，更新数据同样支持更新选项。更新单条数据如下：
+与插入数据一样，更新数据也提供了两个版本的接口：更新满足条件的第一条数据或多条数据，更新数据同样支持提供更新选项。更新单条数据如下：
 
 ```java
 ObjectNode filter = JsonNodeFactory.instance.objectNode();
@@ -137,7 +137,7 @@ databaseService.updateMany("test_collection", filter, update,
 
 ## Delete
 
-删除数据的方法也一样，提供了2个版本，仅需要提供表明和删除条件，满足条件的数据才会被删除。
+删除数据的方法也一样，提供了两个版本，仅需要提供表明和删除条件，满足条件的数据才会被删除。以下是删除满足条件的第一条数据的例子：
 
 ```java
 ObjectNode filter = JsonNodeFactory.instance.objectNode();
@@ -171,7 +171,7 @@ databaseService.deleteMany("test_collection", filter)
 
 ## Count
 
-计算表中数据的条数可以使用以下的方法；需要指定表名、查询条件和参数。
+计算表中数据的条数可以使用以下的方法，需要指定表名、查询条件和参数。
 
 ```java
 ObjectNode filter = JsonNodeFactory.instance.objectNode();
