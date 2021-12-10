@@ -1,6 +1,6 @@
 # Run App
 
-运行 SDK Demo Application，可以用模拟器或者真机，以下为模拟器运行后的画面：
+运行 Java SDK Demo Application，可以用模拟器或者真机，以下为模拟器运行后的画面：
 
 ![Home Page](img/home.png "Home Page")
 

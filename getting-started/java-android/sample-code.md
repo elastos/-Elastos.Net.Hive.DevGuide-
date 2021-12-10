@@ -1,10 +1,10 @@
 # Sample Code
 
-Hello Application 不同于测试用例，它是真实应用场景下如何使用 Hive Java SDK 的用例。本文将介绍 Hello Application 内上传文件的示例：
+Demo App 演示的功能点不同于测试用例，它展示了真实应用场景下如何使用 Hive Java SDK 的功能。本文将介绍 Demo App 内上传文件的示例：
 
 ## Upload File
 
-上传文件的功能是用于展示Files Service的用法，通过 Files Service 可以对 Vault 内的文件进行操作。订阅 Vault Service 之后，利用 Files Service 上传文件，大致分为如下几步：
+上传文件的功能是用于展示 Hive Node 的 Files Service 用法，通过 Files Service 可以对 Vault 内的文件进行操作。订阅 Vault Service 之后，利用 Files Service 上传文件，大致分为如下几步：
 
 - 创建 Vault 对象
 
@@ -20,7 +20,7 @@ public Vault newVault() {
 this.filesService = mainActivity.getSdkContext().newVault().getFilesService();
 ```
 
-- 上传文件，此处串联 CompletableFuture，并将上传操作放在异步线程里执行
+- 上传文件。此处串联 CompletableFuture，并将上传操作放在异步线程里执行，需要将文件内容通过 Writer 上传到 Hive Node 端。
 
 ```java
 public CompletableFuture<Void> writeFileContent(Writer writer) {
