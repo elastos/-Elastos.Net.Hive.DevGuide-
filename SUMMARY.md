@@ -87,11 +87,6 @@
   * [Developer guides](sdks-1/javascript/developer-guides.md)
   * [API Reference](sdks-1/javascript/api-reference.md)
 
-## Advanced topics
-
-* [Backup vault data to another node service](advanced-topics/backup-vault-data-to-another-node-service.md)
-* [TODOs](advanced-topics/todos.md)
-
 ## Node service
 
 * [Introduction](node-service/introduction.md)
