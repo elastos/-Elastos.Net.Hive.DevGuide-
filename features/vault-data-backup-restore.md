@@ -1,8 +1,9 @@
-# Vault data backup/restore
+---
+description: >-
+  Keep remember to backup your vault data into backup service
+---
 
----
-description: Keep remember to backup your vault data into backup service.
----
+# Vault data backup/restore
 
 用户在可信Hive Node上订阅了Vault Service后，为了保证Vault数据的冗余性和可恢复性，支持用户将Vault数据进行快照生成备份数据，并将该备份数据存储到配对的IPFS Node中。
 
