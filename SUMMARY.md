@@ -39,7 +39,7 @@
 * [Hive Node](concepts/hive-node.md)
 * [Vault service](concepts/vault-service.md)
 * [Backup service](concepts/backup-service.md)
-* [Scripting](concepts/scripting.md)
+* [Scripting service](concepts/scripting.md)
 * [Vault backup/restore](concepts/vault-backup-restore.md)
 * [Vault migration](concepts/vault-migration.md)
 
@@ -75,7 +75,7 @@
     * [Query database data](sdks-1/java/developer-guides/query-database-data.md)
     * [Update database data](sdks-1/java/developer-guides/update-database-data.md)
     * [Scripting](sdks-1/java/developer-guides/scripting.md)
-  * [API Reference](sdks-1/java/api-reference.md) 
+  * [API Reference](sdks-1/java/api-reference.md)
 * [Swift](sdks-1/swift/README.md)
   * [Introduction](sdks-1/swift/introduction.md)
   * [Build & Install](sdks-1/swift/build-and-install.md)
