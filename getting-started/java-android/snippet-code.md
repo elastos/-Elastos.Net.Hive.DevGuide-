@@ -74,7 +74,7 @@ FilesService filesService = vault.getFilesService());
 
 ## 上传文件
 
-有了 FilesService 便可以上传文件到 Hive Node 的文件存储内。上传文件时，先获取用于写的 Writer ，然后将文件内容写入即可完成整个上传文件的流程。
+一旦获取 FilesService 接口实例后，便可以通过该接口来将文件数据上传到 Vault serivce中。在实现上传文件时，先获取用于写的 Writer ，然后将文件内容写入完成整个上传文件数据的流程。
 
 ```java
 public CompletableFuture<Void> writeFileContent(Writer writer) {
