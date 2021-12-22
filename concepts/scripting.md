@@ -1,8 +1,8 @@
-# Scripting
+# Scripting Service
 
-Scripting 是一套由开发者在应用开发时，根据具体应用中的数据交互场景，预定义的一套用于访问指定范围内数据集的供其他用户访问者进行数据存储和访问规则。开发者可以通过Scripting 接口来实现复杂的社交应用或者交互式游戏应用，在应用内可以进行数据局部范围内分享和交互。
+Scripting 是一套由开发者在应用开发时，根据具体应用中的数据交互场景，预定义的一套用于访问指定范围内数据集的供其他用户访问者进行数据存储和访问规则。开发者可以通过Scripting Service 接口来实现复杂的社交应用或者交互式游戏应用，在应用内可以进行数据局部范围内分享和交互。
 
-Scripting 机制由 Condition 和 Executalbe 等规则组合使用。
+Scripting Service 由 Condition 和 Executalbe 等规则组合使用。
 
 ## Executable
 
