@@ -1,4 +1,4 @@
-# Snippet Code
+# 编写 App
 
 本章通过实现最基础的文件数据上传功能来指导如何开发使用 Hive Java SDK（本章内简称 SDK），并通过关键代码段展示在应用中对于相应接口调用和对象维护，
 
@@ -18,7 +18,7 @@
 
 ## 创建 Vault
 
-SDK 需要用户先实例化 Vault 对象，然后通过 Vault 对象来获取对应的子服务接口。在实例化 Vault 对象时，需要准备好一定的程序上下文环境。这里我们需要使用 AppContext 和 Hive Node Provider URL地址。创建 AppContext 会用到 Application Instance DID 和 User DID 。
+用户通过 Android Studio 工具创建应用框架后，通过 SDK 实例化 Vault 对象，然后通过 Vault 对象来获取对应的子服务接口。在实例化 Vault 对象时，需要准备好一定的程序上下文环境。这里我们需要使用 AppContext 和 Hive Node Provider URL地址。创建 AppContext 会用到 Application Instance DID 和 User DID 。
 
 ```java
 AppContext appContext = AppContext.build(new AppContextProvider() {
