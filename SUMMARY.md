@@ -47,7 +47,7 @@
 
 * [Introduction](getting-started/introduction.md)
 * [Java/Android](getting-started/java-android/README.md)
-  * [Snippet Code](getting-started/java-android/snippet-code.md)
+  * [Coding App](<getting-started/java-android/Coding App.md>)
   * [Build App](getting-started/java-android/build-app.md)
   * [Run App](getting-started/java-android/run-app.md)
   * [Sample Code](getting-started/java-android/sample-code.md)
