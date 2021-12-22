@@ -1,18 +1,24 @@
 # Snippet Code
 
-如果要了解如何使用 Hive Java SDK（以下简称 SDK），其内的 Demo App 对于如何使用它有很好的展示。本文就以通过 SDK 上传文件到 Hive Node 为例，展示其完整的过程。
+本章通过实现最基础的文件数据上传功能来指导如何开发使用 Hive Java SDK（本章内简称 SDK），并通过关键代码段展示在应用中对于相应接口调用和对象维护，
 
 ## 准备 DID
 
-为了使用 SDK 的功能，你需要至少两个 DID : Application Instance DID 和 User DID 。DID 相关的操作，可以使用 Essentials 应用来完成，具体操作如下。
+开发者应该需要了解到，在向后端存储 Vault 数据时，会涉及到四个DID：
+* 应用程序 DID
+* 应用程序实例 DID
+* 用户 DID
+* 后端Hive Node服务 DID
 
-Application Instance DID 仅需要 mnemonic 和 passphrase，不需要上链，也无其它操作。
+其中，应用程序 DID 由开发人员通过在 Essentials 为该应用程序生成一个DID，并需要将该 DID 公开上链，编译后续该应用程序需求向Essentials 授权时验证其应用程序的合规性。而应用程序实例DID 表示应此应用程序运行在Android 或者 iOS 设备上一个独一无二应用实例。该应用实例 DID 需要开发人员在应用程序内安装时一次生成，但不需要公开上链，仅在应用程序作为用户的 Agent 在登录 Hive Node服务时作登入时验证时使用。
 
-User DID 需要 mnemonic 和 passphrase，并且通过 Essentials 应用来上链。上链完成之后，需要在 Essentials 应用上使用 Hive 存储管理功能，选一个 Hive Node 节点进行绑定，绑定的同时会在 Hive Node 上创建 Vault Service。
+每个使用应用程序具有唯一的DID身份，用户需要在 Essentials 中生成该 DID，同时需要公开上链。完成上链后保管在 Essentials 中，用户后续应用登录时授权使用。后端 Hive Node 服务 DID，跟应用程序实例 DID类似，也是唯一代表该Hive 服务的实例 DID，但是需要公开上链供前端应用交互时双向验证使用。
+
+用于通过在 Essentials 中授权使用指定 DID 身份登录应用程序。在向 后端 Hive Node 请求登录时，需要通过 Essnetials 授权向应用程序实例（实例DID）颁发一个请求登录的凭证。Hive Node 通过验证该登录凭证的真实性，才授权向前端应用发布一个 access token，后续应用通过该 access token来存储和访问 Vault 中的数据。
 
 ## 创建 Vault
 
-创建 Vault 之前需要准备好 AppContext 和 provider address，AppContext 可以通过如下方式创建。创建 AppContext 会用到 Application Instance DID 和 User DID 。
+SDK 需要用户先实例化 Vault 对象，然后通过 Vault 对象来获取对应的子服务接口。在实例化 Vault 对象时，需要准备好一定的程序上下文环境。这里我们需要使用 AppContext 和 Hive Node Provider URL地址。创建 AppContext 会用到 Application Instance DID 和 User DID 。
 
 ```java
 AppContext appContext = AppContext.build(new AppContextProvider() {
@@ -52,15 +58,15 @@ AppContext appContext = AppContext.build(new AppContextProvider() {
 }, userDid.toString());
 ```
 
-provider address 就是之前绑定的 Hive Node 服务地址。通过 AppContext 和 provider address 就可以创建 Vault 了：
+同时通过选择可信的Hive Node 服务节点，填充对应的 Hive Node 地址作为 Provider address 参数。有了 AppContext 对象和 Provider address，就可以实例化已存在的 Vault service 对象：
 
 ```java
 Vault vault = new Vault(appContext, getVaultProviderAddress());
 ```
 
-## 创建 FilesService
+## 获取 FilesService 接口
 
-可以通过创建好的 Vault 来获取 FilesService：
+因为示例中仅涉及文件上传功能，这里只需获取FilesService 接口即可，具体调用接口如下：
 
 ```java
 FilesService filesService = vault.getFilesService());
