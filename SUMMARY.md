@@ -52,7 +52,7 @@
   * [Run App](getting-started/java-android/run-app.md)
   * [Sample Code](getting-started/java-android/sample-code.md)
 * [Swift/iOS](getting-started/swift-ios/README.md)
-  * [Snippet Code](getting-started/swift-ios/snippet-code.md)
+  * [Coding App](getting-started/swift-ios/coding-app.md)
   * [Build App](getting-started/swift-ios/build-app.md)
   * [Run App](getting-started/swift-ios/run-app.md)
   * [Sample Code](getting-started/swift-ios/sample-code.md)
