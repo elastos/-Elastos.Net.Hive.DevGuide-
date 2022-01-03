@@ -16,7 +16,7 @@ FileService 类是 Vault Service 中衍生子服务之一，用于支持对文�
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
 FilesService filesService = vault.getFilesService();
-filesService.getUploadWriter(REMOTE_FILE_PATH)
+filesService.getUploadWriter(YOUR_REMOTE_PATH)
     .thenCompose(this::writeFileContent)
     .thenAcceptAsync(result -> {
         System.out.println("Upload a file using writer.");
@@ -40,7 +40,7 @@ filesService.getUploadWriter(REMOTE_FILE_PATH)
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
 FilesService filesService = vault.getFilesService();
-filesService.getUploadStream(REMOTE_FILE_PATH)
+filesService.getUploadStream(YOUR_REMOTE_PATH)
 .thenCompose(this::writeFileContent)
 .thenAcceptAsync(result -> {
     System.out.println("Upload a file using OutputStream.");
@@ -59,7 +59,7 @@ filesService.getUploadStream(REMOTE_FILE_PATH)
 Vault vault = new Vault(context, getVaultProviderAddress());
 FilesService filesService = vault.getFilesService();
 
-filesService.getDownloadStream(REMOTE_FILE_PATH)
+filesService.getDownloadStream(YOUR_REMOTE_PATH)
 .thenCompose(this::readFileContent)
 .thenAcceptAsync(result -> {
     System.out.println("download the file by input stream successfully");
@@ -69,7 +69,7 @@ filesService.getDownloadStream(REMOTE_FILE_PATH)
     return null;
 });
 
-filesService.getDownloadReader(REMOTE_FILE_PATH)
+filesService.getDownloadReader(YOUR_REMOTE_PATH)
 .thenCompose(this::readFileContent)
 .thenAcceptAsync(result -> {
     System.out.println("download the file by input stream successfully");
@@ -80,12 +80,12 @@ filesService.getDownloadReader(REMOTE_FILE_PATH)
 });
 ```
 
-## 枚举指定目录下所有文件和子目录
+## List files
 
 列出文件目录下的文件，FileInfo 为单个文件信息，path 为文件目录。
 
 ```java
-filesService.list(REMOTE_DIR_PATH)
+filesService.list(YOUR_REMOTE_PATH)
 .thenAcceptAsync(list -> {
     System.out.println("list folder files successfully");
     System.out.println("List<FileInfo> =>");
@@ -101,7 +101,7 @@ filesService.list(REMOTE_DIR_PATH)
 获取单个文件的信息。
 
 ```java
-filesService.stat(REMOTE_FILE_PATH)
+filesService.stat(YOUR_REMOTE_PATH)
 .thenAcceptAsync(fileInfo -> {
     System.out.println("get the state of the file successfully");
     System.out.println("FileInfo =>");
@@ -117,10 +117,9 @@ filesService.stat(REMOTE_FILE_PATH)
 移动单个文件，从 source 位置移动到 target 位置。
 
 ```java
-filesService.move(remoteTxtFilePath, remoteBackupTxtFilePath)
+filesService.move(YOUR_REMOTE_PATH, YOUR_REMOTE_NEW_PATH)
 .thenAcceptAsync(result -> {
-    System.out.println("move the file successfully");
-    System.out.println(" => ");
+    System.out.println("Moved the file to new path in success.");
 }).exceptionally(ex -> {
     System.out.println("failed to move the file");
     ex.printStackTrace();
@@ -133,10 +132,9 @@ filesService.move(remoteTxtFilePath, remoteBackupTxtFilePath)
 删除文件，文件位置为 path 。
 
 ```java
-filesService.delete(REMOTE_FILE_PATH)
+filesService.delete(YOUR_REMOTE_PATH)
 .thenAcceptAsync(result -> {
     System.out.println("delete the file successfully");
-    System.out.println(" =>");
 }).exceptionally(ex -> {
     System.out.println("failed to delete of the file");
     ex.printStackTrace();
