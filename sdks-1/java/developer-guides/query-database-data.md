@@ -1,25 +1,24 @@
 # DatabaseService
 
-Hive Node 的 Database Service 也是 Hive Node 的基础服务，Database Service 基于的 mongodb 是 NoSQL 数据库，Database Service 提供了基础的 CRUD 功能。通过 Database Service 的功能，应用可以存储一些动态数据，比如：讯息、应用配置项目等。
+Hive SDK 通过 DatabaseService 类将非结构化数据上传到对应的 Vault 中。非结构化数据库类型数据是 Hive SDK 支持的数据类型之一。 DatabaseService 类是 Vault Service 中衍生子服务之一，用于支持对非结构化数据类型的操作，比如插入/更新/查询等CRUD功能。非结构化数据一旦存储到Hive Node，就会被持久化道对应的 MongoDB service中。
 
-## Example
+## Insert a document
 
 插入数据的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
-DatabaseServic databaseServic = vault.getDatabaseServic();
+DatabaseServic dbService = vault.getDatabaseServic();
 
-ObjectNode docNode = JsonNodeFactory.instance.objectNode();
-docNode.put("author", "john doe1");
-docNode.put("title", "Eve for Dummies1");
-databaseService.insertOne(COLLECTION_NAME, docNode,
+ObjectNode doc = JsonNodeFactory.instance.objectNode();
+doc.put("author", "john doe1");
+doc.put("title", "Eve for Dummies1");
+dbService.insertOne(YOUR_COLLECT_NAME, doc,
         new InsertOptions().bypassDocumentValidation(false))
 .thenAcceptAsync(insertResult -> {
-    System.out.println("insert the document successfully.");
-    System.out.println("InsertResult =>");
+    System.out.println("Inserted a document to database in success.");
 }).exceptionally(ex -> {
-    System.out.println("failed to insert the document.");
+    System.out.println("Failed to insert a document.");
     ex.printStackTrace();
     return null;
 });
@@ -32,12 +31,11 @@ databaseService.insertOne(COLLECTION_NAME, docNode,
 mongodb 中，collection 代表数据表，此处创建指定名称的数据表；创建之后，便可以插入用户数据。
 
 ```java
-databaseService.createCollection("test_collection")
+databaseService.createCollection("your_collection")
 .thenAcceptAsync(result -> {
-    System.out.println("create the collection successfully");
-    System.out.println("=>");
+    System.out.println("Created a collection successfully");
 }).exceptionally(ex -> {
-    System.out.println("failed to create the collection");
+    System.out.println("Failed to create the collection");
     ex.printStackTrace();
     return null;
 });
@@ -48,12 +46,11 @@ databaseService.createCollection("test_collection")
 删除 mongodb 数据表，表内的数据会一并删除。
 
 ```java
-databaseService.deleteCollection("test_collection")
+databaseService.deleteCollection("your_collection")
 .thenAcceptAsync(result -> {
-    System.out.println("delete the collection successfully");
-    System.out.println("=>");
+    System.out.println("Deleted the collection successfully");
 }).exceptionally(ex -> {
-    System.out.println("failed to delete the collection");
+    System.out.println("Failed to delete the collection");
     ex.printStackTrace();
     return null;
 });
@@ -77,13 +74,12 @@ doc = JsonNodeFactory.instance.objectNode();
 doc.put("author", "john doe3");
 doc.put("title", "Eve for Dummies3");
 nodes.add(doc);
-databaseService.insertMany("test_collection", nodes,
+dbService.insertMany("your_collection", nodes,
 		new InsertOptions().bypassDocumentValidation(false).ordered(true))
 .thenAcceptAsync(insertResult -> {
-    System.out.println("insert the documents successfully.");
-    System.out.println("InsertResult =>");
+    System.out.println("Inserted two documents successfully.");
 }).exceptionally(ex -> {
-    System.out.println("failed to insert the documents.");
+    System.out.println("Failed to insert documents.");
     ex.printStackTrace();
     return null;
 });
@@ -101,13 +97,13 @@ doc.put("author", "john doe1");
 doc.put("title", "Eve for Dummies1_1");
 ObjectNode update = JsonNodeFactory.instance.objectNode();
 update.put("$set", doc);
-databaseService.updateOne("test_collection", filter, update,
+dbService.updateOne("your_collection", filter, update,
         new UpdateOptions().setBypassDocumentValidation(false).setUpsert(true))
 .thenAcceptAsync(updateResult -> {
-    System.out.println("update the document successfully.");
+    System.out.println("updated the document successfully.");
     System.out.println("UpdateResult =>");
 }).exceptionally(ex -> {
-    System.out.println("failed to update the document.");
+    System.out.println("Failed to update the document.");
     ex.printStackTrace();
     return null;
 });
@@ -123,13 +119,12 @@ doc.put("author", "john doe1");
 doc.put("title", "Eve for Dummies1_1");
 ObjectNode update = JsonNodeFactory.instance.objectNode();
 update.put("$set", doc);
-databaseService.updateMany("test_collection", filter, update,
+databaseService.updateMany("your_collection", filter, update,
 		new UpdateOptions().setBypassDocumentValidation(false).setUpsert(true))
 .thenAcceptAsync(updateResult -> {
-    System.out.println("update the documents successfully.");
-    System.out.println("UpdateResult =>");
+    System.out.println("Updated the documents successfully.");
 }).exceptionally(ex -> {
-    System.out.println("failed to update the documents.");
+    System.out.println("Failed to update the documents.");
     ex.printStackTrace();
     return null;
 });
@@ -142,7 +137,7 @@ databaseService.updateMany("test_collection", filter, update,
 ```java
 ObjectNode filter = JsonNodeFactory.instance.objectNode();
 filter.put("author", "john doe2");
-databaseService.deleteOne("test_collection", filter)
+databaseService.deleteOne("your_collection", filter)
 .thenAcceptAsync(deleteResult -> {
     System.out.println("delete the document successfully.");
     System.out.println("DeleteResult =>");
@@ -158,7 +153,7 @@ databaseService.deleteOne("test_collection", filter)
 ```java
 ObjectNode filter = JsonNodeFactory.instance.objectNode();
 filter.put("author", "john doe2");
-databaseService.deleteMany("test_collection", filter)
+databaseService.deleteMany("your_collection", filter)
 .thenAcceptAsync(deleteResult -> {
     System.out.println("delete the documents successfully.");
     System.out.println("DeleteResult =>");
@@ -176,13 +171,13 @@ databaseService.deleteMany("test_collection", filter)
 ```java
 ObjectNode filter = JsonNodeFactory.instance.objectNode();
 filter.put("author", "john doe1");
-databaseService.countDocuments("test_collection", filter,
+databaseService.countDocuments("your_collection", filter,
         new CountOptions().setLimit(1L).setSkip(0L).setMaxTimeMS(1000000000L))
 .thenAcceptAsync(count -> {
-    System.out.println("count the documents successfully.");
+    System.out.println("Count documents successfully.");
     System.out.println("count =>");
 }).exceptionally(ex -> {
-    System.out.println("failed to count the documents.");
+    System.out.println("Failed to count the documents.");
     ex.printStackTrace();
     return null;
 });
