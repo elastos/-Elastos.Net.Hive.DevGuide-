@@ -72,7 +72,6 @@
     * [Subscribe to vault service](sdks-1/java/developer-guides/subscribe-to-vault-service.md)
     * [Subscribe to backup service](sdks-1/java/developer-guides/subscribe-to-backup-service.md)
     * [Upload-download-a-file](sdks-1/java/developer-guides/upload-download-a-file.md)
-    * [Query database data](sdks-1/java/developer-guides/query-database-data.md)
     * [Update database data](sdks-1/java/developer-guides/update-database-data.md)
     * [Scripting](sdks-1/java/developer-guides/scripting.md)
   * [API Reference](sdks-1/java/api-reference.md)
