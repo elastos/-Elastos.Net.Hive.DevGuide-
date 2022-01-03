@@ -6,9 +6,9 @@ BackupSubscription 类就是用来定订阅创建 Backup Service，Hive Node 服
 
 ## Examples
 
-使用 BackupSubscription 对象在可信的Hive Node 订阅创建新的 Backup Service，返回一个 CompletableFuture 对象，包含该订阅的远端 Backup Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+使用 BackupSubscription 对象在可信的Hive Node 订阅创建新的 Backup Service，返回一个 Promise 对象，包含该订阅的远端 Backup Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
 
-```
+```swift
 let subscription = try BackupSubscription(appContext, providerAddress)
 subscription!.subscribe()
 .done { backup in
@@ -31,7 +31,7 @@ subscription!.subscribe()
 
 用户在可信 Hive Node 上订阅创建后，可以使用 backup 对象来存取应用中的数据，也可以在使用以下接口查看对应 Backup Service 的信息。
 
-```
+```swift
 subscription!.checkSubscription()
 .done { backup in
    print("Dump remote backup service:")
@@ -46,7 +46,7 @@ subscription!.checkSubscription()
 用户在使用Backup Service 一段时间，如果发现体验不好，发现另外有可信的 Hive Node 能提供更好的 Backup Service, 则可以取消订阅并销毁该 Backup中的数据，转向另外可信的 Hive Node 节点订阅新的 Backup Service。
 
 
-```
+```swift
 subscription!.unsubscribe()
 .done { success in
    print("Unsubscribed from the backup service")
