@@ -11,7 +11,7 @@ FileService 类是 Vault Service 中衍生子服务之一，用于支持对文�
 
 使用FileService 实例上传文件整个过程通过 CompletableFuture 模式串联起来，最终返回一个 CompletableFuture 对象，表示文件上传成功还是上传失败跑出异常。
 
-通过使用写文件流接口方式上传文件的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+通过使用写文件流接口方式上传文件的示例如下：
 
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
@@ -34,7 +34,7 @@ filesService.getUploadWriter(YOUR_REMOTE_PATH)
 
 使用FileService 实例上传文件整个过程通过 CompletableFuture 模式串联起来，最终返回一个 CompletableFuture 对象，表示文件上传成功还是上传失败跑出异常。
 
-通过使用输出流接口方式上传文件的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+通过使用输出流接口方式上传文件的示例如下：
 
 
 ```java
@@ -88,7 +88,10 @@ filesService.getDownloadReader(YOUR_REMOTE_PATH)
 filesService.list(YOUR_REMOTE_PATH)
 .thenAcceptAsync(list -> {
     System.out.println("list folder files successfully");
-    System.out.println("List<FileInfo> =>");
+    for (FileInfo file in list) {
+        System.out.println("file name => " + file.getName());
+        System.out.println("file size => " + file.getSize());
+    }
 }).exceptionally(ex -> {
     System.out.println("failed to list folder files");
     ex.printStackTrace();
@@ -104,7 +107,8 @@ filesService.list(YOUR_REMOTE_PATH)
 filesService.stat(YOUR_REMOTE_PATH)
 .thenAcceptAsync(fileInfo -> {
     System.out.println("get the state of the file successfully");
-    System.out.println("FileInfo =>");
+    System.out.println("file name => " + fileInfo.getName());
+    System.out.println("file size => " + fileInfo.getSize());
 }).exceptionally(ex -> {
     System.out.println("failed to get the state of the file");
     ex.printStackTrace();
