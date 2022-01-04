@@ -6,7 +6,7 @@ Hive Node 上，为了支持 Vault 数据分享给指定或者所有的访问者
 
 注册脚本的例子如下：
 
-```
+```swift
 let vault = try Vault(context, providerAddress)
 let scriptingService = vault.scriptingService
 // The condition to restrict the user DID.
@@ -46,7 +46,7 @@ scriptingService!.registerScript(SCRIPT_NAME, QueryHasResultCondition("get_group
 
 下面是一个注册脚本的方法原型。注册脚本的参数有：脚本的名称、执行脚本的条件、脚本内容、是否允许匿名用户、是否允许匿名应用
 
-```
+```swift
 func registerScript(_ name: String, _ executable: Executable) -> Promise<Void>
 func registerScript(_ name: String, _ condition: Condition, _ executable: Executable) -> Promise<Void>
 func registerScript(_ name: String, _ executable: Executable, _ allowAnonymousUser: Bool, _ allowAnonymousApp: Bool) -> Promise<Void>
@@ -66,7 +66,7 @@ func unregisterScript(_ name: String) -> Promise<Void>
 
 按照 Scripting Service的说明，数据的访问者若是需要执行脚本，只能通过 Script Runner来执行。与上面注册脚本相对应的执行脚本的例子如下：
 
-```
+```swift
 let params = ["author" : "John", "content" : "message"]
 let scriptRunner = try ScriptRunner(callerContext, providerAddress)
 scriptRunner.callScript(SCRIPT_NAME, params, userDid, appDid, JSON.self)
@@ -84,7 +84,7 @@ Script Runner 用到的参数和创建 Vault 的时候一样，只是提供的 u
 
 执行脚本操作就如上面的示例一样，除了提供必要的参数值之外，还需要指定返回值类型（resultType）
 
-```
+```swift
 func callScript<T>(_ name: String, _ params: [String : Any]?, _ targetDid: String, _ targetAppDid: String, _ resultType: T.Type) -> Promise<T>
 ```
 
@@ -92,7 +92,7 @@ func callScript<T>(_ name: String, _ params: [String : Any]?, _ targetDid: Strin
 
 注册脚本时候的八种脚本类型，有两种情况是需要多执行一步：上传、下载文件。执行上传文件脚本的时候，会先返回事务 ID，然后再调用上传接口将文件上传到脚本对应的 Vault 中，此时 resultType 才是上传类型脚本执行的返回值。
 
-```
+```swift
 func uploadFile(_ transactionId: String) -> Promise<FileWriter>
 ```
 
@@ -100,6 +100,6 @@ func uploadFile(_ transactionId: String) -> Promise<FileWriter>
 
 下载文件和上传文件的操作流程类似，通过事务 ID，下载到指定文件的内容。
 
-```
+```swift
 func downloadFile(_ transactionId: String) -> Promise<FileReader>
 ```

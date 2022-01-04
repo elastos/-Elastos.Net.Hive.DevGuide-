@@ -12,7 +12,7 @@ Hive SDK 通过 FileService 类将文件上传到对应的 Vault 中。文件数
 
 通过使用写文件流接口方式上传文件的示例如下：
 
-```
+```swift
 let vault = try Vault(appContext, providerAddress)
 let filesService = try vault.filesService
 filesService.getUploadWriter(YOUR_REMOTE_PATH)
@@ -32,7 +32,7 @@ filesService.getUploadWriter(YOUR_REMOTE_PATH)
 
 与上传文件类似，下载文件时通过 FileSerice 实例通过获取 Reader 或者 InputStream 实例，再基于Reader 实例或 InputStream 实例下载在 Vault 中的文件数据。
 
-```
+```swift
 filesService.getDownloadReader(YOUR_REMOTE_PATH)
 .then { fileReader in
    return fileReader.read(localCachePath)
@@ -50,7 +50,7 @@ filesService.getDownloadReader(YOUR_REMOTE_PATH)
 
 列出文件目录下的文件，FileInfo 为单个文件信息，path 为文件目录。
 
-```
+```swift
 filesService!.list(YOUR_REMOTE_PATH)
 .done { list in
    print("List folder files successfully.")
@@ -69,7 +69,7 @@ filesService!.list(YOUR_REMOTE_PATH)
 
 获取单个文件的信息。
 
-```
+```swift
 filesService!.stat(YOUR_REMOTE_PATH)
 .done { fileInfo in
    print("get the state of the file successfully.")
@@ -85,7 +85,7 @@ filesService!.stat(YOUR_REMOTE_PATH)
 
 移动单个文件，从 source 位置移动到 target 位置。
 
-```
+```swift
 filesService!.move(YOUR_REMOTE_PATH, YOUR_REMOTE_NEW_PATH)
 .done { success in
    print("Moved the file to new path in success.")
@@ -100,7 +100,7 @@ filesService!.move(YOUR_REMOTE_PATH, YOUR_REMOTE_NEW_PATH)
 
 删除文件，文件位置为 path 。
 
-```
+```swift
 filesService!.delete(YOUR_REMOTE_PATH)
 .done { success in
    print("Delete the file successfully")
