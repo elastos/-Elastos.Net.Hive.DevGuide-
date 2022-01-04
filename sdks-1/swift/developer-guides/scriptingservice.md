@@ -4,7 +4,7 @@
 
 Hive Node 上，为了支持 Vault 数据分享给指定或者所有的访问者，提供了Scripting Service。Scripting Service 通过提供可执行脚本来将 Vault 中的数据（文件或数据库数据）分享给其他人。数据的拥有者设计、注册脚本，数据的使用者执行脚本操作数据。
 
-注册脚本的例子如下（ context 和 vault provider 的设置参见[Developer Guide](./) ）：
+注册脚本的例子如下：
 
 ```
 let vault = try Vault(context, providerAddress)

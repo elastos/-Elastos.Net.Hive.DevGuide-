@@ -1,10 +1,10 @@
 # DatabaseService
 
-Hive Node 的 Database Service 也是 Hive Node 的基础服务，Database Service 基于 mongodb 的 NoSQL 数据库，Database Service 提供了基础的 CRUD 功能。
+Hive SDK 通过 DatabaseService 类将非结构化数据上传到对应的 Vault 中。非结构化数据库类型数据是 Hive SDK 支持的数据类型之一。 DatabaseService 类是 Vault Service 中衍生子服务之一，用于支持对非结构化数据类型的操作，比如插入/更新/查询等CRUD功能。非结构化数据一旦存储到Hive Node，就会被持久化道对应的 MongoDB service中。
 
-## Example
+## Insert a document
 
-插入数据的示例如下（ context 和 vault provider 的设置参见[Developer Guide](./) ）：
+插入数据的示例如下：
 
 ```
 let vault = try Vault(context, providerAddress)
@@ -12,28 +12,30 @@ let databaseServic = vault.databaseService
 
 let docNode = ["author" : "john doe1", "title" : "Eve for Dummies1"]
 
-_databaseService!.insertOne(COLLECTION_NAME, docNode, InsertOptions()
+_databaseService.insertOne(YOUR_COLLECT_NAME, docNode, InsertOptions()
 .bypassDocumentValidation(false))
 .done{ insertResult in
-    print("insert the document successfully.")
+    print("Inserted a document to database in success.")
  }
 .catch{ error in
+	print("Failed to insert a document.")
     print(error)
 }
 ```
 
-插入数据需要先构造 Dictionary 数据，然后插入到指定的数据表（ COLLECTION\_NAME ）中，同时可以指定插入选项 InsertOptions ，这些选项源自mongodb数据库。
+插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION\_NAME ）中，同时可以指定插入选项 InsertOptions ，InsertOptions 选项源自mongodb数据库相对应的功能。
 
 ## Create Collection
 
 mongodb 中，collection 代表数据表，此处创建指定名称的数据表；创建之后，便可以插入用户数据。
 
 ```
-databaseService!.createCollection("test_collection")
+databaseService!.createCollection("your_collection")
 .done { success in
-  print("create the collection successfully")
+  print("Create the collection successfully")
 }
 .catch { error in
+	print("Failed to create the collection")
    print(error)
 }
 ```
@@ -43,47 +45,50 @@ databaseService!.createCollection("test_collection")
 删除 mongodb 数据表，表内的数据一并删除。
 
 ```
-databaseService!.deleteCollection("test_collection")
+databaseService!.deleteCollection("your_collection")
 .done { success in
-   print("delete the collection successfully")
+   print("Delete the collection successfully")
 }
 .catch { error in
+	print("Failed to delete the collection.")
    print(error)
 }
 ```
 
 ## Insert
 
-往数据表中插入数据，可以是单条数据，也可以是多条数据。如上面的示例所示，插入选项 InsertOptions 源自于 mongodb 插入 document 的选项，具体支持哪些选项，可以参考 InsertOptions 的定义。此处展示插入单条数据的例子。
+往数据表中插入数据，可以是单条数据，也可以是多条数据。如上面的示例所示，插入选项 InsertOptions 源自于 mongodb 插入 document 的选项，具体支持哪些选项，可以参考 InsertOptions 的定义。此处展示插入多条数据的例子。
 
 ```
  let nodes = [
                 ["author" : "john doe2", "title" : "Eve for Dummies2"],
                 ["author" : "john doe3", "title" : "Eve for Dummies3"],
             ]
-databaseService!.insertMany("test_collection", nodes, InsertOptions().bypassDocumentValidation(false).ordered(true))
+databaseService.insertMany("your_collection", nodes, InsertOptions().bypassDocumentValidation(false).ordered(true))
 .done { insertResult in
-   print("insert the documents successfully.")
+   print("Inserted two documents successfully.")
 }
 .catch { error in
+  print("Failed to insert documents.")
   print(error)
 }
 ```
 
 ## Update
 
-与插入数据一样，更新数据也提供了两个版本的接口：更新满足条件的第一条数据和多条数据，更新数据同样支持更新选项。更新单条数据如下：
+与插入数据一样，更新数据也提供了两个版本的接口：更新满足条件的第一条数据或多条数据，更新数据同样支持提供更新选项。更新单条数据如下：
 
 ```
 let filter = ["author" : "john doe1"]
 let doc = ["author" : "john doe1", "title" : "Eve for Dummies1_1"]
 let update = ["$set" : doc]
-databaseService!.updateOne("test_collection", filter, update, UpdateOptions()
+databaseService!.updateOne("your_collection", filter, update, UpdateOptions()
 .setBypassDocumentValidation(false).setUpsert(true))
 .done { updateResult in
-   print("update the document successfully.")
+   print("Update the document successfully.")
 }
 .catch { error in
+	print("Failed to update the document.")
    print(error)
 }
 ```
@@ -95,27 +100,29 @@ let filter = ["author" : "john doe1"]
 let doc = ["author" : "john doe1", "title" : "Eve for Dummies1_2"]
 let update = ["$set" : doc]
 
-databaseService!.updateMany("test_collection", filter, update, UpdateOptions()
+databaseService!.updateMany("your_collection", filter, update, UpdateOptions()
 .setBypassDocumentValidation(true))
 .done { updateResult in
-   print("update the documents successfully.")
+   print("Update the documents successfully.")
 }
 .catch { error in
+   print("Failed to update the documents.")
    print(error)
 }
 ```
 
 ## Delete
 
-删除数据的方法也一样，提供了2个版本，仅需要提供表明和删除条件，满足条件的数据才会被删除。
+删除数据的方法也一样，提供了两个版本，仅需要提供表明和删除条件，满足条件的数据才会被删除。以下是删除满足条件的第一条数据的例子：
 
 ```
 let filter = ["author" : "john doe2"]
-databaseService!.deleteOne("test_collection", filter)
+databaseService!.deleteOne("your_collection", filter)
 .done { success in
-  print("delete the document successfully.")
+  print("Delete the document successfully.")
 }
 .catch { error in
+  print("Failed to delete the document.")
   print(error)
 }
 ```
@@ -124,11 +131,12 @@ databaseService!.deleteOne("test_collection", filter)
 
 ```
 let filter = ["author" : "john doe2"]
-databaseService!.deleteMany("test_collection", filter)
+databaseService!.deleteMany("your_collection", filter)
 .done { success in
-   print("delete the documents successfully.")
+   print("Delete the documents successfully.")
 }
 .catch { error in
+  print("Failed to delete the documents.")
   print(error)
 }
 ```
@@ -139,11 +147,13 @@ databaseService!.deleteMany("test_collection", filter)
 
 ```
 let filter = ["author" : "john doe1"]
-databaseService!.countDocuments("test_collection", filter, CountOptions().setLimit(1).setSkip(0).setMaxTimeMS(1000000000))
+databaseService!.countDocuments("your_collection", filter, CountOptions().setLimit(1).setSkip(0).setMaxTimeMS(1000000000))
 .done { count in
-   print("count the documents successfully.")
+   print("Count the documents successfully.")
+   print("count => \(count)")
 }
 .catch { error in
+	print("Failed to count the documents.")
    print(error)
 }
 ```
@@ -154,11 +164,14 @@ databaseService!.countDocuments("test_collection", filter, CountOptions().setLim
 
 ```
 let query = ["author" : "john doe1"]
-databaseService!.findOne("test_collection", query, FindOptions().setSkip(0).setLimit(0))
+databaseService!.findOne("your_collection", query, FindOptions().setSkip(0).setLimit(0))
 .done { document in
-   print("find the document successfully.")
+   print("Find the document successfully.")
+   print("author => \(document["author"])")
+   print("title => \(document["title"])")
 }
 .catch { error in
+   print("Failed to find the document.")
    print(error)
 }
 ```
@@ -167,10 +180,13 @@ databaseService!.findOne("test_collection", query, FindOptions().setSkip(0).setL
 
 ```
 let query = ["author" : "john doe1"]
-databaseService!.findMany("test_collection", query, FindOptions().setSkip(0).setLimit(0))
+databaseService!.findMany("your_collection", query, FindOptions().setSkip(0).setLimit(0))
 .done { list in
-   print("find the documents successfully.")
+   print("Find the documents successfully.")
+   print("author => \(document[author])")
+   print("title => \(document["title"])")
 }.catch { error in
+   print("Failed to find the documents.")
    print(error)
 }
 ```
@@ -179,11 +195,14 @@ databaseService!.findMany("test_collection", query, FindOptions().setSkip(0).set
 
 ```
 let query = ["author" : "john doe1"]
-databaseService!.query("test_collection", query, nil)
+databaseService!.query("your_collection", query, nil)
 .done { list in
-   print("find the documents successfully.")
+   print("Find the documents successfully.")
+   print("author => \(document["author"])")
+   print("title => \(document["title"])")
 }
 .catch { error in
+   print("Failed to find the documents.")
    print(error)
 }
 ```

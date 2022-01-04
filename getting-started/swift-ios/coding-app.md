@@ -81,42 +81,29 @@ let context = try AppContext.build(TestAppContextProvider(STORE-PATH, USER-DID, 
 let vault = Vault(context, providerAddress)
 ```
 
-### 获取 ScriptService 接口
+### 获取 FileService 接口
 
-因为示例中仅涉及文件上传功能，这里只需获取ScriptService、 ScriptRunner接口即可，具体调用接口如下：
+因为示例中仅涉及文件上传功能，这里只需获取FileService接口即可，具体调用接口如下：
 
 ```
-let scriptService = vault.scriptingService
-let scriptRunner = try ScriptRunner(context, providerAddress)
+let fileService = vault.fileService
 ```
 
 ### 上传文件
 
-一旦获取 scriptService 接口实例后，先注册上传脚本(registerScript)，然后调用执行脚本方法(callScript)，最后通过scriptRunner.uploadFile(...)该接口来将文件数据上传到 Vault serivce中。在实现上传文件时，先获取用于写的 Writer ，然后将文件内容写入完成整个上传文件数据的流程。
+一旦获取 FilesService 接口实例后，便可以通过该接口来将文件数据上传到 Vault serivce中。在实现上传文件时，先获取用于写的 Writer ，然后将文件内容写入完成整个上传文件数据的流程。
 
 ```
-self.scriptOwner.scriptingService.registerScript(scriptName, FileUploadExecutable(scriptName).setOutput(true), false, false)
-            .then { _ -> Promise<JSON> in
-                return self.scriptOwner.scriptingService.callScript(self.scriptName, self.param, self.targetDid, self.targetAppDid, JSON.self)
-        }.then { json -> Promise<FileWriter> in
-            print(json)
-            let txid = json[self.scriptName]["transaction_id"].stringValue
-            return self.scriptOwner.scriptRunner.uploadFile(txid)
-        }.then { writer in
+self.scriptOwner.filesService.getUploadWriter(remoteImagePath).then { writer in
             return try writer.write(data: self.imgDate)
-        }
-        .done{ success in
+        }.done { success in
             DispatchQueue.main.async {
                 let text = success == true ? "upload image: success" : "upload image: false"
 
                print(text)
 				// handle your data ......
             }
-        }
-        .catch { error in
-            DispatchQueue.main.async {
+        }.catch { error in
                print(error)
-				// handle your data ......
-            }
         }
 ```
