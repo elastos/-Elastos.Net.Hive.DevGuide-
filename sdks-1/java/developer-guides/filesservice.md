@@ -13,6 +13,18 @@ Hive SDK 通过 FileService 类将文件上传到对应的 Vault 中。文件数
 通过使用写文件流接口方式上传文件的示例如下：
 
 ```java
+public CompletableFuture<Void> writeFileContent(Writer writer) {
+    return CompletableFuture.runAsync(() -> {
+        try {
+            writer.write(REMOTE_FILE_CONTENT);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            throw new CompletionException(e);
+        }
+    });
+}
+
 Vault vault = new Vault(context, getVaultProviderAddress());
 FilesService filesService = vault.getFilesService();
 filesService.getUploadWriter(YOUR_REMOTE_PATH)
@@ -36,6 +48,18 @@ filesService.getUploadWriter(YOUR_REMOTE_PATH)
 通过使用输出流接口方式上传文件的示例如下：
 
 ```java
+public CompletableFuture<Void> writeFileContent(OutputStream out) {
+    return CompletableFuture.runAsync(() -> {
+        try {
+            out.write(REMOTE_FILE_CONTENT.getBytes());
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            throw new CompletionException(e);
+        }
+    });
+}
+
 Vault vault = new Vault(context, getVaultProviderAddress());
 FilesService filesService = vault.getFilesService();
 filesService.getUploadStream(YOUR_REMOTE_PATH)
