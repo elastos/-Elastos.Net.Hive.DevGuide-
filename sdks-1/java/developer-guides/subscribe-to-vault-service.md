@@ -6,7 +6,7 @@ VaultSubscription类就是用来定订阅创建Vault Service，Hive Node服务�
 
 ## Example
 
-使用 vaultSubscription实例在可信Hive Node订阅创建新的Vault Service，返回一个 CompletableFuture 对象，包含已订阅的远端Vault Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+使用 vaultSubscription实例在可信Hive Node订阅创建新的Vault Service，返回一个 CompletableFuture 对象，包含已订阅的远端Vault Service的元数据信息。实际样例代码如下：
 
 ```java
 VaultSbuscription subscription = new VaultSubscription(context, getVaultProvider());

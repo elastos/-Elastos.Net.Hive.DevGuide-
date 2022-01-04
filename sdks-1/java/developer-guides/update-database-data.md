@@ -4,7 +4,7 @@ Hive SDK 通过 DatabaseService 类将非结构化数据上传到对应的 Vault
 
 ## Insert a document
 
-插入数据的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+插入数据的示例如下：
 
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());
@@ -193,7 +193,8 @@ query.put("author", "john doe1");
 databaseService.findOne("test_collection", query, new FindOptions().setSkip(0).setLimit(0))
 .thenAcceptAsync(document -> {
     System.out.println("find the document successfully.");
-    System.out.println("JsonNode =>");
+    System.out.println("author => " + document.get("author").textValue());
+    System.out.println("title => " + document.get("title").textValue());
 }).exceptionally(ex -> {
     System.out.println("failed to find the document.");
     ex.printStackTrace();
@@ -209,7 +210,8 @@ query.put("author", "john doe1");
 databaseService.findMany("test_collection", query, new FindOptions().setSkip(0).setLimit(0))
 .thenAcceptAsync(list -> {
     System.out.println("find the documents successfully.");
-    System.out.println("List<JsonNode> =>");
+    System.out.println("author => " + document.get("author").textValue());
+    System.out.println("title => " + document.get("title").textValue());
 }).exceptionally(ex -> {
     System.out.println("failed to find the documents.");
     ex.printStackTrace();
@@ -225,7 +227,8 @@ query.put("author", "john doe1");
 Assertions.assertNotNull(databaseService.query(COLLECTION_NAME, query, null)
 .thenAcceptAsync(list -> {
     System.out.println("find the documents successfully.");
-    System.out.println("List<JsonNode> =>");
+    System.out.println("author => " + document.get("author").textValue());
+    System.out.println("title => " + document.get("title").textValue());
 }).exceptionally(ex -> {
     System.out.println("failed to find the documents.");
     ex.printStackTrace();
