@@ -1,13 +1,12 @@
 # FilesService
 
-Hive SDK 通过 FileService 类将文件上传到对应的 Vault 中。文件数据是 Hive SDK 支持的数据类型之一。
-FileService 类是 Vault Service 中衍生子服务之一，用于支持对文件类型的操作，比如上传，下载，删除等。文件数据一旦上传到 Hive Node 后，其文件块数据被托管存储到对应的IPFS Node 中，而其元数据信息则被托管到 Vault 内部数据库中。
+Hive SDK 通过 FileService 类将文件上传到对应的 Vault 中。文件数据是 Hive SDK 支持的数据类型之一。 FileService 类是 Vault Service 中衍生子服务之一，用于支持对文件类型的操作，比如上传，下载，删除等。文件数据一旦上传到 Hive Node 后，其文件块数据被托管存储到对应的IPFS Node 中，而其元数据信息则被托管到 Vault 内部数据库中。
 
 ## 上传文件
 
 ### 使用写文件流接口 Writer 方式上传文件数据
 
-上传文件时，需要先从 Vault 实例中获取 FileSerivce 接口实例，然后设置目标路径（REMOTE_FILE_PATH)来获取远程写文件流接口实例 Writer，同时将文件内容写入到该文件流的。写入文件数据的过程，也就是上传文件数据的过程。
+上传文件时，需要先从 Vault 实例中获取 FileSerivce 接口实例，然后设置目标路径（REMOTE\_FILE\_PATH)来获取远程写文件流接口实例 Writer，同时将文件内容写入到该文件流的。写入文件数据的过程，也就是上传文件数据的过程。
 
 使用FileService 实例上传文件整个过程通过 CompletableFuture 模式串联起来，最终返回一个 CompletableFuture 对象，表示文件上传成功还是上传失败跑出异常。
 
@@ -30,12 +29,11 @@ filesService.getUploadWriter(YOUR_REMOTE_PATH)
 
 ### 使用输出流 OutputStream 方式上传文件数据
 
-上传文件时，也可以通过 FileService 接口实例设置目录路径 (REMOTE_FILE_PATH)来获取远程输出流 OutputStream，同时将文件内容写入该输入流 OutputStream 实例中。
+上传文件时，也可以通过 FileService 接口实例设置目录路径 (REMOTE\_FILE\_PATH)来获取远程输出流 OutputStream，同时将文件内容写入该输入流 OutputStream 实例中。
 
 使用FileService 实例上传文件整个过程通过 CompletableFuture 模式串联起来，最终返回一个 CompletableFuture 对象，表示文件上传成功还是上传失败跑出异常。
 
 通过使用输出流接口方式上传文件的示例如下：
-
 
 ```java
 Vault vault = new Vault(context, getVaultProviderAddress());

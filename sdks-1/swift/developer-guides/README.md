@@ -88,7 +88,7 @@ let context = try AppContext.build(TestAppContextProvider(storePath, userDid, ap
 
 ### Example
 
-使用 Payment Service 升级 Vault 空间的第一步是生成订单，此时需要指定价格计划的名称。获取 Hive Node 支持的价格计划列表，参见 [Vault Subscription](vault-subscription.md)。 生成订单操作返回的是订单详情，使用 Payment Service 下单的示例如下：
+使用 Payment Service 升级 Vault 空间的第一步是生成订单，此时需要指定价格计划的名称。获取 Hive Node 支持的价格计划列表，参见 [Vault Subscription](vaultsubscription.md)。 生成订单操作返回的是订单详情，使用 Payment Service 下单的示例如下：
 
 ```
 let paymentService = try VaultSubscription(appContext, providerAddress)

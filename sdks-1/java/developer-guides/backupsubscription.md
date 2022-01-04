@@ -22,9 +22,7 @@ subscription.subscribe().thenAccept(backup -> {
 
 创建订阅完 Backup Service 成功后，就可以通过 Backup service 将该DID身份持有的 Vault 数据备份到该 Hive nodo 节点中。
 
-注意：
-创建订阅 Backup Service 时必须使用与 Vault Service 用一个DID身份创建，这样才可以将对应该 DID 身份对应的vault 数据备份到 Backup service中来。
-为防止单点失效，务必使用与待备份的 Vault Service 不再同一个Hive Node 创建订阅 Backup service。
+注意： 创建订阅 Backup Service 时必须使用与 Vault Service 用一个DID身份创建，这样才可以将对应该 DID 身份对应的vault 数据备份到 Backup service中来。 为防止单点失效，务必使用与待备份的 Vault Service 不再同一个Hive Node 创建订阅 Backup service。
 
 ## Subscription management
 
@@ -46,7 +44,6 @@ subscription.checkSubscription().thenAccept(backup -> {
 ### Unsubscription
 
 用户在使用Backup Service 一段时间，如果发现体验不好，发现另外有可信的 Hive Node 能提供更好的 Backup Service, 则可以取消订阅并销毁该 Backup中的数据，转向另外可信的 Hive Node 节点订阅新的 Backup Service。
-
 
 ```java
 subscription.unsbuscribe().thenAccept(() -> {

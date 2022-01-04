@@ -24,7 +24,7 @@ dbService.insertOne(YOUR_COLLECT_NAME, doc,
 });
 ```
 
-插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION_NAME ）中，同时可以指定插入选项 InsertOptions ，InsertOptions 选项源自mongodb数据库相对应的功能。
+插入数据需要先构造 Json 数据，然后插入到指定的数据表（ COLLECTION\_NAME ）中，同时可以指定插入选项 InsertOptions ，InsertOptions 选项源自mongodb数据库相对应的功能。
 
 ## Create Collection
 

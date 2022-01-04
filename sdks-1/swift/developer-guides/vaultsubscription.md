@@ -6,7 +6,7 @@ VaultSubscription 类就是用来定订阅创建 Vault Service，Hive Node 服�
 
 ## Example
 
-使用 vaultSubscription 对象在可信的Hive Node 订阅创建新的 Vault Service，返回一个 Promise 对象，包含该订阅的远端 Vault Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+使用 vaultSubscription 对象在可信的Hive Node 订阅创建新的 Vault Service，返回一个 Promise 对象，包含该订阅的远端 Vault Service的元数据信息。实际样例代码如下（ context 和 vault provider 的设置参见[Developer Guide](./) ）：
 
 ```swift
 let subscription = try VaultSubscription(testData.appContext, testData.providerAddress)

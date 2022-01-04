@@ -4,7 +4,7 @@ Hive Node 的 Database Service 也是 Hive Node 的基础服务，Database Servi
 
 ## Example
 
-插入数据的示例如下（ context 和 vault provider 的设置参见[Developer Guide](README.md) ）：
+插入数据的示例如下（ context 和 vault provider 的设置参见[Developer Guide](./) ）：
 
 ```
 let vault = try Vault(context, providerAddress)
@@ -22,7 +22,7 @@ _databaseService!.insertOne(COLLECTION_NAME, docNode, InsertOptions()
 }
 ```
 
-插入数据需要先构造 Dictionary 数据，然后插入到指定的数据表（ COLLECTION_NAME ）中，同时可以指定插入选项 InsertOptions ，这些选项源自mongodb数据库。
+插入数据需要先构造 Dictionary 数据，然后插入到指定的数据表（ COLLECTION\_NAME ）中，同时可以指定插入选项 InsertOptions ，这些选项源自mongodb数据库。
 
 ## Create Collection
 
