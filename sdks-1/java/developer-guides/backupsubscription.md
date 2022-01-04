@@ -12,7 +12,9 @@ BackupSubscription 类就是用来定订阅创建 Backup Service，Hive Node 服
 BackupSubscritpion subscription = new BackupSubscritpion(context, getVaultProvider());
 subscription.subscribe().thenAccept(backup -> {
     System.out.println("Registered backup service successfully");
-    System.out.println("BackupInfo ==>");
+    System.out.println("service DID ==> " + backup.getServiceDid());
+    System.out.println("storage quota ==> " + backup.getStorageQuota());
+    System.out.println("price plan ==> " + backup.getPricePlan());
 }).exceptionally(ex -> {
     System.out.println("Failed to register backup service")
     ex.printStackTrace();
@@ -33,7 +35,9 @@ subscription.subscribe().thenAccept(backup -> {
 ```java
 subscription.checkSubscription().thenAccept(backup -> {
     System.out.println("Dump remote backup service:");
-    System.out.println("...");
+    System.out.println("service DID ==> " + backup.getServiceDid());
+    System.out.println("storage quota ==> " + backup.getStorageQuota());
+    System.out.println("price plan ==> " + backup.getPricePlan());
 }).exceptinally(ex -> {
     System.out.println("Failed to check backup subscription");
     ex.printStackTrace();

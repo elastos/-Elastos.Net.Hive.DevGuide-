@@ -101,7 +101,6 @@ dbService.updateOne("your_collection", filter, update,
         new UpdateOptions().setBypassDocumentValidation(false).setUpsert(true))
 .thenAcceptAsync(updateResult -> {
     System.out.println("updated the document successfully.");
-    System.out.println("UpdateResult =>");
 }).exceptionally(ex -> {
     System.out.println("Failed to update the document.");
     ex.printStackTrace();
@@ -140,7 +139,6 @@ filter.put("author", "john doe2");
 databaseService.deleteOne("your_collection", filter)
 .thenAcceptAsync(deleteResult -> {
     System.out.println("delete the document successfully.");
-    System.out.println("DeleteResult =>");
 }).exceptionally(ex -> {
     System.out.println("failed to delete the document.");
     ex.printStackTrace();
@@ -156,7 +154,6 @@ filter.put("author", "john doe2");
 databaseService.deleteMany("your_collection", filter)
 .thenAcceptAsync(deleteResult -> {
     System.out.println("delete the documents successfully.");
-    System.out.println("DeleteResult =>");
 }).exceptionally(ex -> {
     System.out.println("failed to delete the documents.");
     ex.printStackTrace();
@@ -175,7 +172,7 @@ databaseService.countDocuments("your_collection", filter,
         new CountOptions().setLimit(1L).setSkip(0L).setMaxTimeMS(1000000000L))
 .thenAcceptAsync(count -> {
     System.out.println("Count documents successfully.");
-    System.out.println("count =>");
+    System.out.println("count => " + count);
 }).exceptionally(ex -> {
     System.out.println("Failed to count the documents.");
     ex.printStackTrace();

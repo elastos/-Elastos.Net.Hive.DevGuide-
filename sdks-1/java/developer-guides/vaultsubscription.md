@@ -12,7 +12,9 @@ VaultSubscription类就是用来定订阅创建Vault Service，Hive Node服务�
 VaultSbuscription subscription = new VaultSubscription(context, getVaultProvider());
 subscription.subscribe().thenAccept(vaultInfo -> {
     System.out.println("Registered vault service successfully");
-    System.out.println("vaultinfo ==>");
+    System.out.println("service DID ==> " + vaultInfo.getServiceDid());
+    System.out.println("storage quota ==> " + vaultInfo.getStorageQuota());
+    System.out.println("price plan ==> " + vaultInfo.getPricePlan());
 }).exceptionally(ex -> {
     System.out.println("Failed to register vault service")
     ex.printStackTrace();
@@ -31,7 +33,9 @@ subscription.subscribe().thenAccept(vaultInfo -> {
 ```java
 subscription.checkSubscription().thenAccept(vaultInfo -> {
     System.out.println("Dump remote vault service:");
-    System.out.println("...");
+    System.out.println("service DID ==> " + vaultInfo.getServiceDid());
+    System.out.println("storage quota ==> " + vaultInfo.getStorageQuota());
+    System.out.println("price plan ==> " + vaultInfo.getPricePlan());
 }).exceptinally(ex -> {
     System.out.println("Failed to check vault subscription");
     ex.printStackTrace();
