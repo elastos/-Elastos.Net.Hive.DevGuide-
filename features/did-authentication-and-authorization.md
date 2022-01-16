@@ -35,8 +35,9 @@ Hive service deeply integrates DID, realizes user authentication and authorizati
 
 * Essentials Wallet
 * 第三方应用
-* Third-party application
 * Hive 服务
+* Essentials Wallet
+* Third-party application
 * Hive service
 
 用户在使用Hive服务之前，需要在前端应用Essentials Wallet创建或导入目标DID身份，同时保证该DID文档已公开发布到EID侧链中。后续所有的基于DID用户授权都在Essentials Wallet中完成。
