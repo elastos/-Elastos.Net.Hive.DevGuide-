@@ -2,9 +2,13 @@
 
 Hive Swift SDK 是 Elastos Hive 针对 Swift 语言开发者提供的客户端 SDK 版本，开发者在应用开发中集成该 SDK 使用Hive Node提供的数据存取服务。目前 SDK 兼容的最低 Swift 语言版本是 4.2。
 
+Hive Swift SDK is a client SDK version provided by Elastos Hive for Swift language developers. Developers integrate the SDK in application development and use the data access service provided by Hive Node. At present, the minimum Swift language version compatible with SDK is 4.2.
+
 ## Features
 
 Hive Swift SDK 向前端应用程序提供 以下功能集类型接口：
+
+Hive Swift SDK provides front-end applications with the following feature set type interfaces:
 
 * Files data storage;
 * Database data storage;
@@ -13,12 +17,14 @@ Hive Swift SDK 向前端应用程序提供 以下功能集类型接口：
 * Subscription to back service
 * Vault backup and restore
 
-## Repository 
+## Repository
 
-Hive Swift SDK 是 OpenSource 项目实现，代码仓库托管在 Github，请参见这里：
-https://github.com/elastos/Elastos.NET.Hive.Swift.SDK
+Hive Swift SDK 是 OpenSource 项目实现，代码仓库托管在 Github，请参见这里： https://github.com/elastos/Elastos.NET.Hive.Swift.SDK
+
+Hive Swift SDK is the implementation of OpenSource project, and the code repository is hosted in Github, see: [https://github.com/elastos/Elastos.NET.Hive.Swift.SDK](https://github.com/elastos/Elastos.NET.Hive.Swift.SDK)
 
 ## Supports
+
 Elastos Hive Swift SDKs are supported by Trinity Tech and the community developers through GitHub issues. Also, we would love to get your contributions, whether they are in form of bug reports, Requests for Enhancement (RFE), documentation, or code patches.
 
 ## License
