@@ -2,8 +2,12 @@
 
 开发者通过以下两种方式使用Hive Java SDK：
 
+Developers use Hive Java SDK in the following two ways:
+
 * 使用 Gradle 或者 Maven 的包管理器，直接从 package repository 中下载由开发者编译的分发包，适合于初级开发者便利集成
 * 下载源代码来构建环境编译集成
+* Use the package manager of Gradle or Maven to download the distribution package compiled by developers directly from the package repository, which is suitable for junior developers to facilitate integration.
+* Download source code to build environment compilation integration
 
 ## How To Use SDK package
 
@@ -43,7 +47,7 @@ $ cd Elastos.NET.Hive.Java.SDK
 
 Then open the Eclipse to build the project and run the test cases. As an alternative to Eclipse, you can also use the following commands.
 
-With the simple command below, build the whole project and run the test cases from terminal: 
+With the simple command below, build the whole project and run the test cases from terminal:
 
 ```
 $ ./gradlew build
