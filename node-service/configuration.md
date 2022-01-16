@@ -14,6 +14,7 @@ The execution of Hive Node service depends on its configuration file, which incl
 Taking the configuration parameters of the development environment as an example, the following parameters that may be used in the configuration file are introduced:
 
 * DID Resolver和ELA Resolver
+* DID Resolver and ELA Resolver
 
 ```
 DID_RESOLVER=https://api.trinity-tech.cn/eid
