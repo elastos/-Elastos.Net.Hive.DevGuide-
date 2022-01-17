@@ -30,7 +30,7 @@
 * [DID Authentication and Authorization](features/did-authentication-and-authorization.md)
 * [Vault Selection](features/vault-selection.md)
 * [Scripting Mechanism](features/scripting-mechanism.md)
-* [Integrated IPFS for file storage](features/integrated-ipfs-for-file-storage.md)
+* [Integrated IPFS for file Storage](features/integrated-ipfs-for-file-storage.md)
 * [Vault data backup/restore](features/vault-data-backup-restore.md)
 * [Vault migration](features/vault-migration.md)
 
