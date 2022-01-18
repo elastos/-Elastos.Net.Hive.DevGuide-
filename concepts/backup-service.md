@@ -1,9 +1,5 @@
-# Backup service
-
-Backup service是基于指定DID身份的数据备份service。用户通过指定DID身份在可信Hive Node上订阅Backup service后，可以目标DID对应的Vault数据备份到该backup service中。
+# Backup Service
 
 Backup service is a data backup service based on the specified DID identity. Users can back up the Vault data corresponding to the target DID to the Backup service after subscribing to it on the trusted Hive Node by specifying the DID identity.
 
-Backup service会将vault的备份数据副本存储在配对的IPFS node中，并持有对备份数据元数据的管理。用户随时可以通过该Backup service中的备份数据重建恢复新的Vault Service，并继续提供数据存取服务。
-
-Backup service will save the backup data copy of the vault in the paired IPFS node and manage the metadata of the backup data. Users can restore the new Vault Service through the backup data reconstruction in the Backup service at any time and continue to provide data access services.
+Backup service will save the backup data copy of the Vault in the paired IPFS node and manage the metadata pertaining to the backup data. Users can restore the new Vault service through the backup data reconstruction in the Backup service at any time, while also continuing to provide data access services.
