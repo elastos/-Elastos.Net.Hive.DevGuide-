@@ -1,3 +1,5 @@
-# Vault Migration
+# Vault migration
 
-Hive not only supports users who initially choose a trusted Hive Node to subscribe to the Vault service, but also can migrate the Vault service to a new Hive Node during use, as well as continue to provide homogeneous Vault service.
+Hive不仅支持用户可以初始选择可信的Hive Node上订阅Vault Service，也可以在使用过程中将Vault Service迁移到新的Hive Node中，继续提供同质的Vault service。
+
+Hive not only supports users to initially choose a trusted Hive Node to subscribe to the Vault Service, but also can migrate the Vault Service to a new Hive Node during use, as well as continue to provide homogeneous Vault service.
