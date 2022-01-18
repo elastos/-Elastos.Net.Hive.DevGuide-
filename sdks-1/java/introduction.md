@@ -1,25 +1,31 @@
 # Introduction
 
-Hive Java SDK is a client SDK version provided by Elastos Hive for Java language developers. Developers integrate this SDK in application development and use the data access service provided by Hive Node. At present, the lowest Java language version compatible with SDK is Java 1.8 (i.e. Java8), which can be used in application development based on standard Java desktop or Android Java environment.
+Hive Java SDK 是 Elastos Hive 针对 Java 语言开发者提供的客户端SDK版本，开发者在应用开发中集成该SDK使用Hive Node提供的数据存取服务。目前 SDK 兼容的最低 Java 语言版本是 Java 1.8 (aka Java8)，可以使用在 desktop 的基于标准 Java 环境，或者 Android Java 环境的应用程序开发中。
+
+Hive Java SDK is a client SDK version provided by Elastos Hive for Java language developers. Developers integrate this SDK in application development and use the data access service provided by Hive Node. At present, the lowest Java language version compatible with SDK is Java 1.8 (aka Java8), which can be used in application development based on standard Java environment of desktop or Android Java environment.
 
 ## Features
 
-Hive Java SDK provides the following feature set type interfaces to frontend applications:
+Hive Java SDK 向前端应用程序提供 以下功能集类型接口：
 
-* Files data storage
-* Database data storage
+Hive Java SDK provides the following feature set type interfaces to front-end applications:
+
+* Files data storage;
+* Database data storage;
 * Scripting
-* Subscription to Vault service
-* Subscription to Back service
+* Subscription to vault service
+* Subscription to back service
 * Vault backup and restore
 
 ## Repository
 
+Hive Java SDK 是 OpenSource 项目实现，代码仓库托管在 Github，请参见这里： https://github.com/elastos/Elastos.Hive.Java.SDK
+
 Hive Java SDK is the implementation of OpenSource project, and the code repository is hosted in Github. See: [https://github.com/elastos/Elastos.Hive.Java.SDK](https://github.com/elastos/Elastos.Hive.Java.SDK)
 
-## Support
+## Supports
 
-Elastos Hive Java SDKs are supported by Trinity Tech and the community developers through GitHub issues. Also, we'd love to receive your contributions, whether they're bug reports, Requests for Enhancement (RFE), documentation, or code patches.
+Elastos Hive Java SDKs are supported by Trinity Tech and the community developers through GitHub issues. Also, we would love to get your contributions, whether they are in form of bug reports, Requests for Enhancement (RFE), documentation, or code patches.
 
 ## License
 
