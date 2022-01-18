@@ -68,7 +68,7 @@
 * [Java](sdks-1/java/README.md)
   * [Introduction](sdks-1/java/introduction.md)
   * [Build & Install](sdks-1/java/build-and-install.md)
-  * [Developer guides](sdks-1/java/developer-guides/README.md)
+  * [Developer Guides](sdks-1/java/developer-guides/README.md)
     * [VaultSubscription](sdks-1/java/developer-guides/vaultsubscription.md)
     * [BackupSubscription](sdks-1/java/developer-guides/backupsubscription.md)
     * [FilesService](sdks-1/java/developer-guides/filesservice.md)
