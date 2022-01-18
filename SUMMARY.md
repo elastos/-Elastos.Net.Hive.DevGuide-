@@ -31,7 +31,7 @@
 * [Vault Selection](features/vault-selection.md)
 * [Scripting Mechanism](features/scripting-mechanism.md)
 * [Integrated IPFS for file Storage](features/integrated-ipfs-for-file-storage.md)
-* [Vault data backup/restore](features/vault-data-backup-restore.md)
+* [Vault Data Backup/Restore](features/vault-data-backup-restore.md)
 * [Vault migration](features/vault-migration.md)
 
 ## Concepts
