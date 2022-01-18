@@ -37,7 +37,7 @@
 ## Concepts
 
 * [Hive Node](concepts/hive-node.md)
-* [Vault service](concepts/vault-service.md)
+* [Vault Service](concepts/vault-service.md)
 * [Backup service](concepts/backup-service.md)
 * [Scripting service](concepts/scripting.md)
 * [Vault backup/restore](concepts/vault-backup-restore.md)
