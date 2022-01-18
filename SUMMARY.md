@@ -41,7 +41,7 @@
 * [Backup Service](concepts/backup-service.md)
 * [Scripting Service](concepts/scripting.md)
 * [Vault Backup/Restore](concepts/vault-backup-restore.md)
-* [Vault migration](concepts/vault-migration.md)
+* [Vault Migration](concepts/vault-migration.md)
 
 ## Getting Started
 
