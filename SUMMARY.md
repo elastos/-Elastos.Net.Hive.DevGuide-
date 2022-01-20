@@ -96,7 +96,7 @@
 * [Introduction](node-service/introduction.md)
 * [Install & Deployment](node-service/install-and-deployment/README.md)
   * [Deploy as Docker Containers](node-service/install-and-deployment/deploy-as-docker-containers.md)
-  * [Direct deployment](node-service/install-and-deployment/direct-deployment.md)
+  * [Direct Deployment](node-service/install-and-deployment/direct-deployment.md)
 * [Configuration](node-service/configuration.md)
 * [Http API Reference](node-service/http-api-reference.md)
 
