@@ -78,7 +78,7 @@
 * [Swift](sdks-1/swift/README.md)
   * [Introduction](sdks-1/swift/introduction.md)
   * [Build & Install](sdks-1/swift/build-and-install.md)
-  * [Developer guides](sdks-1/swift/developer-guides/README.md)
+  * [Developer Guides](sdks-1/swift/developer-guides/README.md)
     * [VaultSubscription](sdks-1/swift/developer-guides/vaultsubscription.md)
     * [BackupSubscription](sdks-1/swift/developer-guides/backupsubscription.md)
     * [FilesService](sdks-1/swift/developer-guides/filesservice.md)
