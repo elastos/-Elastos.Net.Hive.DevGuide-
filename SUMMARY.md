@@ -1,29 +1,6 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [Technical Deep Dive](technical-deep-dive/README.md)
-  * [Authentication](technical-deep-dive/authentication.md)
-  * [MongoDB Operations](technical-deep-dive/mongodb-operations.md)
-  * [Files APIs](technical-deep-dive/files-apis.md)
-  * [Scripting Mechanism](technical-deep-dive/scripting-mechanism.md)
-  * [Pub/Sub](technical-deep-dive/pub-sub.md)
-  * [Payment Mechanism](technical-deep-dive/payment-mechanism.md)
-* [Hello World App](hello-world-app/README.md)
-  * [Get Started](hello-world-app/get-started/README.md)
-    * [Deploy the App](hello-world-app/get-started/deploy-the-app.md)
-  * [Run the App](hello-world-app/run-the-app.md)
-  * [Deeper Look](hello-world-app/deeper-look.md)
-* [SDKs](sdks/README.md)
-  * [Features Guide](sdks/features-guide.md)
-  * [API References](sdks/api-references/README.md)
-    * [Java SDK](sdks/api-references/java-sdk.md)
-    * [Swift SDK](sdks/api-references/swift-sdk.md)
-    * [Javascript SDK](sdks/api-references/javascript-sdk.md)
-    * [Cordova](sdks/api-references/cordova.md)
-    * [Native](sdks/api-references/native.md)
-* [Hive Node](hive-node/README.md)
-  * [Deploy a Hive Node](hive-node/deploy-a-hive-node.md)
-  * [Complete API Reference: (Auth, DB, files, scripts, pub/sub, etc.)](hive-node/complete-api-reference-auth-db-files-scripts-pub-sub-etc..md)
 
 ## Features
 
@@ -64,32 +41,32 @@
 
 ## SDKs
 
-* [Summary](sdks-1/summary.md)
-* [Java](sdks-1/java/README.md)
-  * [Introduction](sdks-1/java/introduction.md)
-  * [Build & Install](sdks-1/java/build-and-install.md)
-  * [Developer Guides](sdks-1/java/developer-guides/README.md)
-    * [VaultSubscription](sdks-1/java/developer-guides/vaultsubscription.md)
-    * [BackupSubscription](sdks-1/java/developer-guides/backupsubscription.md)
-    * [FilesService](sdks-1/java/developer-guides/filesservice.md)
-    * [DatabaseService](sdks-1/java/developer-guides/databaseservice.md)
-    * [ScriptingService](sdks-1/java/developer-guides/scriptingservice.md)
-  * [API Reference](sdks-1/java/api-reference.md)
-* [Swift](sdks-1/swift/README.md)
-  * [Introduction](sdks-1/swift/introduction.md)
-  * [Build & Install](sdks-1/swift/build-and-install.md)
-  * [Developer Guides](sdks-1/swift/developer-guides/README.md)
-    * [VaultSubscription](sdks-1/swift/developer-guides/vaultsubscription.md)
-    * [BackupSubscription](sdks-1/swift/developer-guides/backupsubscription.md)
-    * [FilesService](sdks-1/swift/developer-guides/filesservice.md)
-    * [DatabaseService](sdks-1/swift/developer-guides/databaseservice.md)
-    * [ScriptingService](sdks-1/swift/developer-guides/scriptingservice.md)
-  * [API Reference](sdks-1/swift/api-reference.md)
-* [Javascript](sdks-1/javascript/README.md)
-  * [Introduction](sdks-1/javascript/introduction.md)
-  * [Build & Install](sdks-1/javascript/build-and-install.md)
-  * [Developer guides](sdks-1/javascript/developer-guides.md)
-  * [API Reference](sdks-1/javascript/api-reference.md)
+* [Summary](sdks/summary.md)
+* [Java](sdks/java/README.md)
+  * [Introduction](sdks/java/introduction.md)
+  * [Build & Install](sdks/java/build-and-install.md)
+  * [Developer Guides](sdks/java/developer-guides/README.md)
+    * [VaultSubscription](sdks/java/developer-guides/vaultsubscription.md)
+    * [BackupSubscription](sdks/java/developer-guides/backupsubscription.md)
+    * [FilesService](sdks/java/developer-guides/filesservice.md)
+    * [DatabaseService](sdks/java/developer-guides/databaseservice.md)
+    * [ScriptingService](sdks/java/developer-guides/scriptingservice.md)
+  * [API Reference](sdks/java/api-reference.md)
+* [Swift](sdks/swift/README.md)
+  * [Introduction](sdks/swift/introduction.md)
+  * [Build & Install](sdks/swift/build-and-install.md)
+  * [Developer Guides](sdks/swift/developer-guides/README.md)
+    * [VaultSubscription](sdks/swift/developer-guides/vaultsubscription.md)
+    * [BackupSubscription](sdks/swift/developer-guides/backupsubscription.md)
+    * [FilesService](sdks/swift/developer-guides/filesservice.md)
+    * [DatabaseService](sdks/swift/developer-guides/databaseservice.md)
+    * [ScriptingService](sdks/swift/developer-guides/scriptingservice.md)
+  * [API Reference](sdks/swift/api-reference.md)
+* [Javascript](sdks/javascript/README.md)
+  * [Introduction](sdks/javascript/introduction.md)
+  * [Build & Install](sdks/javascript/build-and-install.md)
+  * [Developer guides](sdks/javascript/developer-guides.md)
+  * [API Reference](sdks/javascript/api-reference.md)
 
 ## Node service
 
@@ -99,11 +76,3 @@
   * [Direct Deployment](node-service/install-and-deployment/direct-deployment.md)
 * [Configuration](node-service/configuration.md)
 * [Http API Reference](node-service/http-api-reference.md)
-
-## Community
-
-* [TODO](community/todo.md)
-
-## Project
-
-* [TODO](project/todo.md)
