@@ -4,7 +4,7 @@ description: >-
   accessibility and redundancy of vault data.
 ---
 
-# Integrated IPFS for file Storage
+# 📥 Integrated IPFS for File Storage
 
 ### Why Use an Integrated IPFS Solution?
 

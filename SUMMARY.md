@@ -1,28 +1,28 @@
 # Table of contents
 
-* [Introduction](README.md)
+* [ℹ Introduction](README.md)
 
 ## Features
 
-* [DID Authentication and Authorization](features/did-authentication-and-authorization.md)
-* [Vault Selection](features/vault-selection.md)
-* [Scripting Mechanism](features/scripting-mechanism.md)
-* [Integrated IPFS for file Storage](features/integrated-ipfs-for-file-storage.md)
-* [Vault Data Backup/Restore](features/vault-data-backup-restore.md)
-* [Vault Migration](features/vault-migration.md)
+* [🆔 DID Authentication and Authorization](features/did-authentication-and-authorization.md)
+* [🏦 Vault Selection](features/vault-selection.md)
+* [📜 Scripting Mechanism](features/scripting-mechanism.md)
+* [📥 Integrated IPFS for File Storage](features/integrated-ipfs-for-file-storage.md)
+* [♻ Vault Data Backup/Restore](features/vault-data-backup-restore.md)
+* [➡ Vault Migration](features/vault-migration.md)
 
 ## Concepts
 
-* [Hive Node](concepts/hive-node.md)
-* [Vault Service](concepts/vault-service.md)
-* [Backup Service](concepts/backup-service.md)
-* [Scripting Service](concepts/scripting.md)
+* [🐝 Hive Node](concepts/hive-node.md)
+* [🏦 Vault Service](concepts/vault-service.md)
+* [☑ Backup Service](concepts/backup-service.md)
+* [📜 Scripting Service](concepts/scripting.md)
 * [Vault Backup/Restore](concepts/vault-backup-restore.md)
-* [Vault Migration](concepts/vault-migration.md)
+* [➡ Vault Migration](concepts/vault-migration.md)
 
 ## Getting Started
 
-* [Introduction](getting-started/introduction.md)
+* [ℹ Introduction](getting-started/introduction.md)
 * [Java/Android](getting-started/java-android/README.md)
   * [Coding App](getting-started/java-android/coding-app.md)
   * [Build App](getting-started/java-android/build-app.md)
@@ -41,11 +41,11 @@
 
 ## SDKs
 
-* [Summary](sdks/summary.md)
+* [ℹ Summary](sdks/summary.md)
 * [Java](sdks/java/README.md)
-  * [Introduction](sdks/java/introduction.md)
-  * [Build & Install](sdks/java/build-and-install.md)
-  * [Developer Guides](sdks/java/developer-guides/README.md)
+  * [ℹ Introduction](sdks/java/introduction.md)
+  * [🛠 Build & Install](sdks/java/build-and-install.md)
+  * [💻 Developer Guides](sdks/java/developer-guides/README.md)
     * [VaultSubscription](sdks/java/developer-guides/vaultsubscription.md)
     * [BackupSubscription](sdks/java/developer-guides/backupsubscription.md)
     * [FilesService](sdks/java/developer-guides/filesservice.md)
@@ -53,9 +53,9 @@
     * [ScriptingService](sdks/java/developer-guides/scriptingservice.md)
   * [API Reference](sdks/java/api-reference.md)
 * [Swift](sdks/swift/README.md)
-  * [Introduction](sdks/swift/introduction.md)
-  * [Build & Install](sdks/swift/build-and-install.md)
-  * [Developer Guides](sdks/swift/developer-guides/README.md)
+  * [ℹ Introduction](sdks/swift/introduction.md)
+  * [⛏ Build & Install](sdks/swift/build-and-install.md)
+  * [🖥 Developer Guides](sdks/swift/developer-guides/README.md)
     * [VaultSubscription](sdks/swift/developer-guides/vaultsubscription.md)
     * [BackupSubscription](sdks/swift/developer-guides/backupsubscription.md)
     * [FilesService](sdks/swift/developer-guides/filesservice.md)
@@ -63,15 +63,15 @@
     * [ScriptingService](sdks/swift/developer-guides/scriptingservice.md)
   * [API Reference](sdks/swift/api-reference.md)
 * [Javascript](sdks/javascript/README.md)
-  * [Introduction](sdks/javascript/introduction.md)
-  * [Build & Install](sdks/javascript/build-and-install.md)
-  * [Developer guides](sdks/javascript/developer-guides.md)
+  * [ℹ Introduction](sdks/javascript/introduction.md)
+  * [⚒ Build & Install](sdks/javascript/build-and-install.md)
+  * [🖥 Developer Guides](sdks/javascript/developer-guides.md)
   * [API Reference](sdks/javascript/api-reference.md)
 
 ## Node service
 
-* [Introduction](node-service/introduction.md)
-* [Install & Deployment](node-service/install-and-deployment/README.md)
+* [ℹ Introduction](node-service/introduction.md)
+* [📀 Install & Deployment](node-service/install-and-deployment/README.md)
   * [Deploy as Docker Containers](node-service/install-and-deployment/deploy-as-docker-containers.md)
   * [Direct Deployment](node-service/install-and-deployment/direct-deployment.md)
 * [Configuration](node-service/configuration.md)
