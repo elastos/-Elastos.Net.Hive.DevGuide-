@@ -12,6 +12,7 @@ Hive Javascript SDK provides the following feature set type interfaces to fronte
 * Subscription to Vault service
 * Subscription to Back service
 * Vault backup and restore
+* Payment service
 
 ## Repository
 
