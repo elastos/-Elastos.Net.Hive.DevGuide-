@@ -10,58 +10,77 @@ Taking the configuration parameters of the development environment as an example
 * DID Resolver and ELA Resolver
 
 ```
-DID_RESOLVER=https://api.trinity-tech.cn/eid
-ELA_RESOLVER=https://api-testnet.elastos.io/ela
+EID_RESOLVER_URL = https://api-testnet.elastos.io/eid
+ESC_RESOLVER_URL = https://api-testnet.elastos.io/esc
 ```
 
-* Hive Node Instance DID
+* Hive Node Instance DID Private Key
 
 ```
-DID_MNEMONIC="advance duty suspect finish space matter squeeze elephant twenty over stick shield"
-DID_PASSPHRASE=secret
-DID_STOREPASS=password
+SERVICE_DID_PRIVATE_KEY = 9DuAF1uFqCb8V7Jpx2oBX9QrGKDoD4QWahZ4yDMCvMvMgoN563SRNh1dPLiP4ebQPw3aMdf7YicnAPCohBMg5G2TKc89kgK8saFYzZ1hAtar9yqMX9JqxjCp7etEx2ryEZSZfDECqYRAzMcZXsTpPdjvyiGGYJvFEmTGvMy4sSafkq51P1dH9XwKGpVHF94NAcJqdh4Qscx9ntHHeGYM8gwsUmA7yzSbvCxtmsTVjXkTVtHv8YQBcECdS5CLVrSGaFGd2hGHr2tN8HbbdS6tbMnMf6aRDqPMJmxxS8jDF1dbzWd7wYf9xfxhJv5BQYiWKEm1HVBNadrWZacQDsokZkwXkmxnuAJpeYi2c3cShXQPudK2c1ngbxrmBCbwN8cqLPGJTy7FHA1FH1rf5VAZBFVc8YJHJoW6Zq4TL6K62xxs1CP1eXg9wwPzPVJ5JM3grwFyPs6vDD3RL1jLNYzMhHP5HarstRMwBqqRAPJNZmLfHhz18k5pBt2CLZ3oG4CE2gUxwXzZy2eNchKwMyCg2PFn9SGbazFAMhxDUpmiqfhfZeJRkp53oc2AX5bVKBWvyamzkVFhFnQUKz8ci8v2U85RZvxcmrnNNprsdoTjmoxLA2G6cG9BhYuLkXzcwJxQrxw4YDNzx4Vp8r3DAekGxAM72nGjXk9P8Pfi3Dv7ZZn2aDaHbWqbZnuJPwDVxdNgAJZYqPBDPNoUWmjgB3YBu5jSXEVCWBS5WbYk1DDUX6tXJ8LWLuUBL7mNbqeJ6L3co9u5RMsDLNV6Nk5H842Nbp4BQQvuTnQitMYYj7S9p4Tr5QzEV91UpdW7xUSamnZ6dk4rcSRcvhd7iJzTarwJyDsgZU7WGFxTnokuV3P33S9NFw9FhaYoefLDiX18L2NmsQDrrr6ry7SM5hcHGkkJ7DNWfZj7m2pGk724grHCkcjXNXngttLBhBjEyGUJx5oQAazRKLZLDYk3cMC3HCyRJ53q76Bj8ySF4zaQNnKEfFwihipc9eqVomQmm1k6qfq5bSBpUzsqGX7WwzUbWFVrEVKC9B1C4bjMo5MjiXxHteq7vmm7uF6zWnqwFjJLLB8zVS3mUoCezssQj4ZgyZVjzziXpAVQstmkp3g49rVVQr3PGmmLvjNSJ4PwH9miwYxwc9Tj3Hbf6R3V8PupyV9pde9UT9q5dA9KkUzfy9CbDVJkXeE3T1gjp2v1ksuZxoJWoAxQnXZSn9axZa2SwWY13c9DQ4vG3tfSSqK9AvJbqyNuZCJKLdWgKKADKiWMRoxvgkHcKFvUaEcmgMzVBAs5vgRLr8Vegh1tycudk5854wS9DCZF28b75wmBgGLRSg55vvJH8Qtm6NQTxtioj8ctZygXsEH9Wow2iHCoYGNgVM8HipH6qWCNJ1JmxRHdu59DWyRXWWvNWpeeHZomahta5C5nwCMV3PKHkcrh8AeeoeT7u65diokCHjSnSCCFrj646f79afg4TB7FjEyPqUK6NYNpaLZ1DkGDw5yxBERXCkzBMogdN1TCN3ExUtv9eNZYkoVtVnaYdMadWb5dLWLQzWJXRgGyn1WLeDYWFuzAKbfEJZiamHuHHU4MWCnNDhgzr9YRzY364cSwjMoef5tVygPWHXM8PuPbmLJTbSHqAFnveCwjMo3xCBtrB2rYGXCzB13tduKtiVXTVBqApi9257h17GQ7pChS58CBur4kYBZ4oEb8Zqb32SxLcNk7Kkua6vvxSNTUNRL6k6mXuchG9GjZJQxfQMXHgQ
+PASSPHRASE = 123456
+PASSWORD = password
+```
+
+* Credential issued by User DID to service DID
+
+```
+NODE_CREDENTIAL = FmYVqq4Pq4U7wDk3aVxZVC55NhZ3zNZLyWgP9cusiwn5JxiDPyQqf44961Pjbp8VEpLJZuLiWPsjx8tXXjNijUkYeCU6KKAm8LFtqgund8ADTXcskNedqjGmfsvUBk9rxB2Wo3fzXoCviNUFDbMY6EhfTgUzVY1GwdfWQFaZ87gvuj9iLZxw79hvJRQGqaJJECGCe5GVpUmW9XbRwDg89c9QYRXt3nxhYYyfQaTmqboodu1ieh9KuQUML4CigZtwTGU6EeCbDSm11uBa8EszsNjHSPtJC1WfDdo4kHjRcQRuqUkG6uYCC6uVjbM8pxHUoY3pGHrNmLgrkMCYjz3fwAWRHvxppfa23Ro8uYfbMbQ5BdYCC2MHwBSjQZi6i3GYo5B8dof4wUJKmkQmVATEiXckn8Ayeg29rgnznj4Mpr8H92p9EgVrgCvh8ao1dxYJQoMR4H6pM7BoG11aETVd9Y98qvKTcE3sTv2Xky2WBexVAq99C5RdQBDmxNud8oEt5KVQRPNNF2LDzy2WJGEDrTEf1FpjExyLMznNvgQ1dnNsUDGtACs8Sntp3DGegYHUdEDVZ1WbcAFeoLzBrWMTEcs1wWD6E8kZwhXqcLSgsp1PUU7pk7LwAZjaWthofDwmutZo5sdajgTbGd6hPJfbavJa84fePiMg6kuzqkDjjhy1fWJp6pETrbj9Jk7wfRqwMn2AGknQpNHwwQV8nwwL7ARFDf3kN2ahisfy3LTS9nSo3GkFor
 ```
 
 * The local data directory location is used to save DID and other information.
 
 ```
-HIVE_DATA = ./data
+DATA_STORE_PATH = ./data
+```
+
+* Enable to report issue via sentry
+
+```
+SENTRY_ENABLED = False
+SENTRY_DSN = https://1dafd5d11608420aacbbf76f4288960f@o339076.ingest.sentry.io/5524839
 ```
 
 * Payment profile and wallet address of the Hive Node controller
 
 ```
-HIVE_PAYMENT_CONFIG=./payment_config.json
-HIVE_PAYMENT_ADDRESS=EN9YK69ScA6WFgVQW3UZcmSRLSCStaU2pQ
+PAYMENT_ENABLED = True
+PAYMENT_CONFIG_PATH = ./payment_config.json
+PAYMENT_CONTRACT_ADDRESS = 0x81897263EC51A2314d256703b2B9f57664B772a9
+PAYMENT_RECEIVING_ADDRESS = 0xB98c051c98D8fB5436fC62fc8a7FdA487a482776
 ```
 
 * MongoDB configuration
 
 ```
-MONGO_TYPE=
-MONGO_HOST=localhost
-MONGO_PORT=27020
+ATLAS_ENABLED = False
+MONGODB_URL = mongodb://localhost:27018
 ```
 
-* The name of the database used for management of the Hive Node.
+* IPFS node service
 
 ```
-DID_INFO_DB_NAME=hive_manage_info
+IPFS_NODE_URL = http://localhost:5020
+IPFS_GATEWAY_URL = http://localhost:8081
 ```
 
-* Basic information of Hive Node: version number and submitted hash value
+* CORS support on node side
 
 ```
-HIVE_VERSION=v2.3.6
-HIVE_COMMIT_HASH=cec7d255e758bfddea3cff0a36b117bae0770b13
+ENABLE_CORS = True
 ```
 
-* Is CORS switch supported?
+* Hive node version/commit ID.
 
 ```
-ENABLE_CORS=True
+VERSION = v2.9.1
+LAST_COMMIT = cec7d255
 ```
 
-* IPFS service configuration information
+* basic information about this node.
 
-IPFS\_NODE\_URL = http://localhost:5002 IPFS\_PROXY\_URL = http://localhost:8080
+```
+NODE_NAME = localNode
+NODE_EMAIL = contract@trinity-tech.io
+NODE_DESCRIPTION = "local node for testing"
+```
