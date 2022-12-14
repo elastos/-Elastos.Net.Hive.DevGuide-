@@ -32,8 +32,8 @@ To create the AppContext, the process is this:
       getLocalDataDir: (): string => {
         return "/";
       },
-      getAppInstanceDocument: (): Promise<DIDDocument> => {
-        return Promise.resolve(didDocument);
+      getAppInstanceDocument: (): DIDDocument => {
+        return didDocument;
       },
       getAuthorization: (authenticationChallengeJWtCode: string): Promise<string> => {
         /**
@@ -54,8 +54,7 @@ To create the AppContext, the process is this:
       }
     }
 
-    let appContext = await AppContext.build(appContextProvider, userDid, AppDID.APP_DID);
-    return appContext;
+    return AppContext.build(appContextProvider, userDid, AppDID.APP_DID);
   }
 ```
 
