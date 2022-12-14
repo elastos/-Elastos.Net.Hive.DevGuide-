@@ -2,18 +2,30 @@
 
 Hive SDK uploads files to the corresponding Vault through the FilesService class. File is one of the data types supported by Hive SDK. The FileService class is one of the derived sub-services in Vault Service, which is used to support the operation of file types, such as uploading, downloading, and deleting. Once the data is uploaded to Hive Node, its file block data is hosted and saved in the corresponding IPFS Node, while its metadata information is hosted in the Vault internal database.
 
+The encryption files service is also be supported for security purpose. It will encrypt the file content on the node.
+
+## Get the Files Service
+
+```javascript
+// normal files service
+const vault = new Vault(context, getProviderAddress());
+const filesService = vault.getFilesService();
+
+// encryption files service
+const vault = new Vault(context, getProviderAddress());
+await vault.enableEncryption(storepass); // local DID store password
+const filesService = vault.getFilesService();
+```
+
 ## Upload File
 
 ### Upload File Data by Writing File Stream Interface Writer
 
-When uploading a file, you need to get the FilesService interface instance from the VaultServices instance, and then set the target path (REMOTE\_FILE\_PATH) and the file content.
+When uploading a file, you need to get the FilesService interface instance from the Vault instance, and then set the target path (REMOTE\_FILE\_PATH) and the file content.
 
 Here's an example of uploading files by using the upload interface:
 
 ```javascript
-const vaultServices = new VaultServices(context, getProviderAddress());
-const filesService = vaultServices.getFilesService();
-
 const file = new File(YOUR_LOCAL_PATH);
 await filesService.upload(YOUR_REMOTE_PATH, file.read());
 ```
@@ -23,8 +35,8 @@ await filesService.upload(YOUR_REMOTE_PATH, file.read());
 Similar to uploading files, when downloading file you've uploaded through the FilesService instance, directly call download method with the remote file path.
 
 ```javascript
-const vaultServices = new VaultServices(context, getProviderAddress());
-const filesService = vaultServices.getFilesService();
+const vault = new Vault(context, getProviderAddress());
+const filesService = vault.getFilesService();
 
 const data: Buffer = await filesService.download(YOUR_REMOTE_PATH);
 ```

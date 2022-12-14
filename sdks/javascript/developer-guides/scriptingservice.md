@@ -5,8 +5,8 @@ On Hive Node, in order to support Vault data sharing to designated or all visito
 An example of registration scripts is as follows:
 
 ```javascript
-const vaultServices = new VaultServices(context, getProviderAddress());
-const scriptingService = vaultServices.getScriptingService();
+const vault = new Vault(context, getProviderAddress());
+const scriptingService = vault.getScriptingService();
 
 const filter = {"collection": COLLECTION_GROUP_MESSAGE, "did": "$caller_did"}
 const msgDoc = {"author": "$params.author", "content": "$params.content"};
@@ -16,6 +16,13 @@ await scriptingService.registerScript(YOUR_SCRIPT_NAME, new InsertExecutable(YOU
 ```
 
 This example demonstrates how to register a script. When doing so, you need to set the condition to restrict the data users. In addition, the content of the script (executable) is a template, which allows the user who calls the script to insert the content (type is InsertExecutable) into the data table. At the same time, the script limits the data that data visitors can access (parameters defined by $params). After registering the script, visitors who meet the conditions can insert data by executing the script. The usage scenario here is to send messages to the Vault of the data controller.
+
+When other DID will want to call the script, he can use class ScriptRunner. Or even when anyone without DID will want to call the script the public data share by the owner, he can use class AnonymousScriptRunner. Here is how to get the instance of the class ScriptRunner and AnonymousScriptRunner.
+
+```javascript
+const scriptingRunner = new ScriptRunner(context, getProviderAddress());
+const anonymousScriptingRunner = new AnonymousScriptRunner(getProviderAddress());
+```
 
 ### Register Script
 

@@ -2,14 +2,26 @@
 
 Hive SDK uploads unstructured data to the corresponding Vault through DatabaseService class. Unstructured database type data is one of the data types supported by Hive SDK. DatabaseService class is one of the derived sub-services in Vault Service, which is used to support operations on unstructured data types, such as insert/update/query of the CRUD functions. Once the unstructured data is saved in Hive Node, it will be persisted in the corresponding MongoDB service.
 
+Encrypting database service is also be supported. This is for more security of the documents under the collection. The encryption database service will encrypt every field of the document.
+
+## Get the Database Service
+
+```javascript
+// normal database service
+const vault = new Vault(context, getProviderAddress());
+const databaseService = vault.getDatabaseService();
+
+// normal database service
+const vault = new Vault(context, getProviderAddress());
+await vault.enableEncryption(storepass); // local DID store password
+const databaseService = vault.getDatabaseService(true);
+```
+
 ## Insert a Document
 
 An example of inserted data is as follows:
 
 ```javascript
-const vaultServices = new VaultServices(context, getProviderAddress());
-const databaseService = vaultServices.getDatabaseService();
-
 const docNode = {"author": "john doe1", "title": "Eve for Dummies1"};
 const result = await databaseService.insertOne(COLLECTION_NAME, docNode, new InsertOptions(false, false, true));
 ```
